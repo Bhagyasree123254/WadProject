@@ -4,6 +4,8 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from .models.product import Product
 from .models.category import Category
+from .models.new_releases import New_releases
+
 
 
 
@@ -49,3 +51,7 @@ def bookpage(request):
 def booksdownload(request):
     products=Product.get_all_products()
     return render(request,'booksdownload.html',{'products':products})
+
+def new_releases(request):
+    prds1=New_releases.get_all_newreleases()
+    return render(request, 'new_releases.html', {'products1': prds1})

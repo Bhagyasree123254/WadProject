@@ -3,21 +3,21 @@
 
 
 {% block content1 %}
-<h1 style="font-style:oblique;
-  font-size: 40px;
-  color:rgb(70, 3, 3);">
-    Adventure Books</h1>
+
 
 <div class="container-fluid">
 
   <div class="row mx-auto">
 
     {% for product in products %}
-  <div class="card mx-auto mb-3 mt-3" style="width: 18rem;">
+<div class="card mx-auto mb-3 mt-3" style="width:20%">
     <img src="{{product.image.url}}" class="card-img-top" alt="book">
     <div class="card-body">
-        <a href="/bookpage?name={{product.name}}"><h5 class="card-title">{{product.name}}</h5></a>
-      <p class="card-text"><b>Price: {{product.price}}</b></p>
+      <h4 class="card-title">{{product.name}}</h4>
+      <p class="card-text"><b>Price: Rs.{{product.price}}</b></p>
+    </div>
+    <div class="card-body">
+       <a href="/bookpage?name={{product.name}}"><h5>More details</h5></a>
     </div>
   </div>
   {% endfor %}

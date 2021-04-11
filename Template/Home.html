@@ -11,7 +11,26 @@
         <link rel="stylesheet" href="{%  static  'css/login.css'  %}">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        button2 {
+    background-color: rgb(15, 75, 240);
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    float: right;
+    text-align: center;
+    margin-left: 5px;
+}
 
+/* set a hover effect for the button*/
+button2:hover {
+    opacity: 0.8;
+}
+
+    </style>
 
     </head>
 
@@ -26,83 +45,12 @@
           <input type="text" placeholder="Search the book you want.." name="search">
           <button type="submit"><i class="fa fa-fw fa-search" style="font-size: 28px; padding-bottom: 7px;"></i></button>
           <button2 style=" width: 10%; background-color: #e6400e; margin-left: 5px;"><a href="#"><i class="fa fa-shopping-cart" style="color: white;"></i></a>My Cart</button2>
-            <button2 onclick="document.getElementById('id02').style.display='block'" style="width:auto;">Login</button2>
-          <button1 onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Sign Up</button1>
 
         </form>
         </div>
 
 
         <!-- SignUp-->
-        <div id="id01" class="modal1">
-          <div class="signup">
-          <form class="modal1-content animate" action="/action_page.php">
-            <div class="imgcontainer1">
-              <span onclick="document.getElementById('id01').style.display='none'" class="close1" title="Close Modal">&times;</span>
-
-            </div>
-            <br>
-            <br>
-            <div class="container1">
-                  <label><b>Email</b></label>
-                  <input type="text" placeholder="Enter Email" name="email" required>
-
-                  <label><b>Password</b></label>
-                  <input type="password" placeholder="Enter Password" name="psw" required>
-
-                  <label><b>Repeat Password</b></label>
-                  <input type="password" placeholder="Repeat Password" name="psw-repeat" required>
-                  <input type="checkbox"> Remember me
-                  <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
-
-                  <div class="clearfix">
-
-                      <button1 type="submit" class="signupbtn">Sign Up</button1>
-                      <button1 type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn1">Cancel</button1>
-                  </div>
-              </div>
-          </form>
-          </div>
-        </div>
-
-        <!-- Login-->
-
-        <div id="id02" class="modal2">
-            <div class="login">
-                <form class="modal2-content animate" action="/action_page.php">
-
-                    <div class="imgcontainer2">
-                        <span onclick="document.getElementById('id02').style.display='none'" class="close2" title="Close Modal">&times;</span>
-                        <img src=
-"https://achieve.lausd.net/cms/lib/CA01000043/Centricity/domain/779/welligentbuttons/login.png" alt="Image" class="image">
-                    </div>
-
-                    <div class="container2">
-                        <label for="details" style= font-size:18px;><b>Choose a login option:</b></label>
-                        <select name="details" id="details" style= "font-size: 15px;padding: 1px;border-width:medium;">
-                            <option value="retailer">Retailer</option>
-                            <option value="user">User</option>
-                        </select>
-                        <br>
-                        <br>
-                        <label for="uname"><b>Username</b></label>
-                        <input type="text" placeholder="Enter Username" name="uname" required>
-
-                        <label for="psw"><b>Password</b></label>
-                        <input type="password" placeholder="Enter Password" name="psw" required>
-
-                        <button2 type="submit">Login</button2>
-
-                        <input type="checkbox" checked="checked" name="remember"> Remember me
-                    </div>
-
-                    <div class="container2" style="background-color:#f1f1f1">
-                        <button2 type="button" onclick="document.getElementById('id02').style.display='none'" class="cancelbtn2">Cancel</button2>
-                        <span class="psw">Forgot <a href="#">password?</a></span>
-                    </div>
-            </form>
-        </div>
-    </div>
 
         <br>
         <br>
@@ -230,45 +178,12 @@
             
             <br>
             <br>
-            <section>
-              <h2>New Releases</h2>
-            <div class="rownew">
-              <div class="columnnew">
-                <div class="contentnew">
-                   <img src="https://www.free-ebooks.net/2d_covers/large/1616221849.jpg" alt="Newreleasebook" style="width:100%" width="400px" height="550px">
-                </div>
-              </div>
-              <div class="columnnew">
-                <div class="contentnew">
-                <img src="https://tse2.mm.bing.net/th?id=OIP.dMRyVRd5ue25uCmK05Gn7AHaLZ&pid=Api&P=0&w=300&h=300" alt="Newreleasebook" style="width:100%" width="400px" height="550px">
-                </div>
-              </div>
-            </div>
-            </section>
-
 
             <!-- END MAIN -->
             </div>
             
             <script>
 
-            //Signup
-            var modal1 = document.getElementById('id01');
- 
-            window.onclick = function(event) {
-              if (event.target == modal1) {
-              modal1.style.display = "none";
-              }
-            }
-            // Login
-
-            var modal2 = document.getElementById('id02');
-
-            window.onclick = function(event) {
-              if (event.target == modal2) {
-              modal2.style.display = "none";
-              }
-            }
             filterSelection("all")
             function filterSelection(c) {
               var x, i;
@@ -279,7 +194,7 @@
                 if (x[i].className.indexOf(c) > -1) w3AddClass(x[i], "show");
               }
             }
-            
+
             function w3AddClass(element, name) {
               var i, arr1, arr2;
               arr1 = element.className.split(" ");
@@ -288,20 +203,20 @@
                 if (arr1.indexOf(arr2[i]) == -1) {element.className += " " + arr2[i];}
               }
             }
-            
+
             function w3RemoveClass(element, name) {
               var i, arr1, arr2;
               arr1 = element.className.split(" ");
               arr2 = name.split(" ");
               for (i = 0; i < arr2.length; i++) {
                 while (arr1.indexOf(arr2[i]) > -1) {
-                  arr1.splice(arr1.indexOf(arr2[i]), 1);     
+                  arr1.splice(arr1.indexOf(arr2[i]), 1);
                 }
               }
               element.className = arr1.join(" ");
             }
-            
-            
+
+
             // Add active class to the current button (highlight it)
 
             var btnContainer = document.getElementById("myBtnContainer");
@@ -315,6 +230,68 @@
             }
 
             </script>
+       <!-- slideshow-->
+        <h2 >New Releases</h2>
+
+        <div class="slideshow-container" style="text-align:center">
+
+        <div class="mySlides fade" style="text-align:center">
+          <div class="numbertext">1 / 3</div>
+          <a href="#" target="_blank"><img src="https://www.free-ebooks.net/2d_covers/large/1616221849.jpg" style="width:35%" width="400px" height="550px" ></a>
+          <br>
+          <br>
+          <br>
+          <div class="text" style="color:blue"><b>The Reformer</b></div>
+        </div>
+
+        <div class="mySlides fade">
+          <div class="numbertext">2 / 3</div>
+          <a href="#" target="_blank"><img src="https://tse2.mm.bing.net/th?id=OIP.uj9XZXpaH0ZLAOEjIIzt3wHaLH&pid=Api&P=0&w=300&h=300" style="width:35%" width="400px" height="550px"></a>
+          <br>
+          <br>
+          <br>
+          <div class="text" style="color:blue"><b>The Last to Know</b></div>
+        </div>
+
+        <div class="mySlides fade">
+          <div class="numbertext">3 / 3</div>
+          <a href="#" target="_blank"><img src="https://tse2.mm.bing.net/th?id=OIP.dMRyVRd5ue25uCmK05Gn7AHaLZ&pid=Api&P=0&w=300&h=300" style="width:35%" width="400px" height="550px"></a>
+          <br>
+          <br>
+          <br>
+          <div class="text" style="color:blue"><b>The Red Book</b></div>
+        </div>
+
+        </div>
+        <br>
+
+        <div style="text-align:center">
+          <span class="dot"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+        </div>
+
+        <script>
+        var slideIndex = 0;
+        showSlides();
+
+        function showSlides() {
+          var i;
+          var slides = document.getElementsByClassName("mySlides");
+          var dots = document.getElementsByClassName("dot");
+          for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+          }
+          slideIndex++;
+          if (slideIndex > slides.length) {slideIndex = 1}
+          for (i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" active", "");
+          }
+          slides[slideIndex-1].style.display = "block";
+          dots[slideIndex-1].className += " active";
+          setTimeout(showSlides, 3000); // Change image every 3 seconds
+        }
+        </script>
 
         <footer>
               <div class="foosec">

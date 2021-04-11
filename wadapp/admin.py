@@ -1,6 +1,7 @@
 from django.contrib import admin
 from .models.product import Product
 from .models.category import Category
+from .models.customer import Customer
 from .models.new_releases import New_releases
 
 class AdminProduct(admin.ModelAdmin):
@@ -11,6 +12,7 @@ class AdminCategory(admin.ModelAdmin):
 
 class AdminNew(admin.ModelAdmin):
     list_display = ['name', 'price', 'category']
+admin.site.register(Customer)
 # Register your models here.
 
 

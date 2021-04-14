@@ -7,8 +7,6 @@
         <meta charset="UTF-8">
         <title>Wad Project | Home</title>
         <link rel="stylesheet" href="{%  static  'css/Home.css'  %}">
-        <link rel="stylesheet" href="{%  static  'css/signup.css'  %}">
-        <link rel="stylesheet" href="{%  static  'css/login.css'  %}">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
@@ -72,7 +70,7 @@ button2:hover {
               </div>
             </div>
 
-            <a href="{% url 'booksdownload' %}" target="_blank"><i class="fa fa-download"></i> Books for Download</a>
+            <a href="{% url 'downloadbooks' %}" target="_blank"><i class="fa fa-download"></i> Books for Download</a>
             <a href="#"><i class="fa fa-fw fa-truck"></i>Place order</a>
             <a href="#"><i class="fa fa-user"></i>My account</a>
             <a href="{% url 'new_releases' %}"><i class="fa fa-book"></i>New Releases</a>
@@ -234,33 +232,17 @@ button2:hover {
         <h2 >New Releases</h2>
 
         <div class="slideshow-container" style="text-align:center">
+        {% for newproduct in newproducts %}
 
-        <div class="mySlides fade" style="text-align:center">
-          <div class="numbertext">1 / 3</div>
-          <a href="#" target="_blank"><img src="https://www.free-ebooks.net/2d_covers/large/1616221849.jpg" style="width:35%" width="400px" height="550px" ></a>
-          <br>
-          <br>
-          <br>
-          <div class="text" style="color:blue"><b>The Reformer</b></div>
-        </div>
+            <div class="mySlides fade" style="text-align:center">
+                <div class="numbertext"> {{newproduct.id_number}} / 3</div>
+                    <a href="/newbookpage?name={{newproduct.name}}" target="_blank"><img src="{{newproduct.image.url}}" style="width:35%" width="400px" height="550px" ></a>
+                    <br>
 
-        <div class="mySlides fade">
-          <div class="numbertext">2 / 3</div>
-          <a href="#" target="_blank"><img src="https://tse2.mm.bing.net/th?id=OIP.uj9XZXpaH0ZLAOEjIIzt3wHaLH&pid=Api&P=0&w=300&h=300" style="width:35%" width="400px" height="550px"></a>
-          <br>
-          <br>
-          <br>
-          <div class="text" style="color:blue"><b>The Last to Know</b></div>
-        </div>
+                <div class="text" style="color:blue; font-size:22px" ><b>{{newproduct.name}}</b></div>
+            </div>
 
-        <div class="mySlides fade">
-          <div class="numbertext">3 / 3</div>
-          <a href="#" target="_blank"><img src="https://tse2.mm.bing.net/th?id=OIP.dMRyVRd5ue25uCmK05Gn7AHaLZ&pid=Api&P=0&w=300&h=300" style="width:35%" width="400px" height="550px"></a>
-          <br>
-          <br>
-          <br>
-          <div class="text" style="color:blue"><b>The Red Book</b></div>
-        </div>
+            {% endfor %}
 
         </div>
         <br>
@@ -272,6 +254,8 @@ button2:hover {
         </div>
 
         <script>
+
+
         var slideIndex = 0;
         showSlides();
 

@@ -6,20 +6,16 @@ from .models.product import Product
 from .models.category import Category
 from .models.new_releases import New_releases
 from .models.customer import Customer
+from .models.downloadbooks import DownloadBook
 
 
 
 def Home(request):
-    products = None
     categories = Category.get_all_categories()
-    catgoryID= request.GET.get('category')
-    if catgoryID:
-        products = Product.get_all_products_by_id(catgoryID)
-    else:
-        products = Product.get_all_products();
 
-    data= {products: products, categories: categories}
-    return render(request, 'Home.html', {'categories': categories})
+    newproducts = New_releases.get_all_newreleases()
+
+    return render(request, 'Home.html', {'categories': categories,'newproducts':newproducts})
 
 
 
@@ -47,10 +43,19 @@ def bookpage(request):
 
     return render(request,'bookpage.html',{'products': products})
 
+def newbookpage(request):
 
-def booksdownload(request):
-    products=Product.get_all_products()
-    return render(request,'booksdownload.html',{'products':products})
+    name=request.GET.get('name')
+    if name:
+        products1 = New_releases.get_newreleases_by_name(name)
+    else:
+        products1 = New_releases.get_all_newreleases()
+
+    return render(request,'newbookpage.html',{'products1': products1})
+
+def downloadbooks(request):
+    dlbooks = DownloadBook.get_all_downloadbooks()
+    return render(request,'downloadbooks.html',{'dlbooks':dlbooks})
 
 def new_releases(request):
     prds1=New_releases.get_all_newreleases()

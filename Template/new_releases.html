@@ -2,21 +2,18 @@
 
 {% block content1 %}
 
-
+<h1>New Releases</h1>
 <div class="container-fluid">
         <div class="row mx-auto">
 
-
-
-
                 {% for product in products1 %}
-            <div class="card mx-auto mb-3" style="width: 18rem;">
-                <a href="{% url 'fantasy2' %}"><img class="card-img-top" src="{{product.image.url}}" width="400px" height="500px" alt="Card image cap"></a>
+            <div class="card mx-auto mb-3 mt-3" style="width: 18rem;">
+                <img class="card-img-top" src="{{product.image.url}}" alt="New book">
                 <div class="card-body">
                   <h5 class="card-title">{{product.name}}</h5>
-                  <p class="card-text">{{product.price}}</p>
+                  <p class="card-text">Rs. {{product.price}}</p>
+                    <a href="/newbookpage?name={{product.name}}" class="card-link"><h5>More details</h5></a>
 
-                  <a href="#" class="btn btn-primary">Add to cart</a>
                 </div>
               </div>
             {% endfor %}

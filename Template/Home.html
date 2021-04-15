@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 {% load static %}
 
@@ -9,28 +8,29 @@
         <link rel="stylesheet" href="{%  static  'css/Home.css'  %}">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <style>
-        button2 {
-    background-color: rgb(15, 75, 240);
-    color: white;
-    padding: 14px 20px;
-    margin: 8px 0;
-    border: none;
-    cursor: pointer;
-    width: 100%;
-    float: right;
-    text-align: center;
-    margin-left: 5px;
-}
+      button2 {
+        background-color: rgb(15, 75, 240);
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+        float: right;
+        text-align: center;
+        margin-left: 5px;
+      }
 
-/* set a hover effect for the button*/
-button2:hover {
-    opacity: 0.8;
-}
-
+    /* set a hover effect for the button*/
+     button2:hover {
+     opacity: 0.8;
+    }
     </style>
 
     </head>
+
 
     <body>
         <header>
@@ -79,108 +79,68 @@ button2:hover {
         </div>
 
 
-
+        <br>
+        <br>
         <div class="main">
 
-            <br>
-            
             <h2>Book Categories</h2>
-            
+
             <div id="myBtnContainer">
-              <button class="btn active" onclick="filterSelection('all')"> Show all</button>
-              <button class="btn" onclick="filterSelection('scfi')"> ScienceFiction</button>
-              <button class="btn" onclick="filterSelection('fantasy')"> Fantasy</button>
-              <button class="btn" onclick="filterSelection('humor')"> Humor</button>
-              <button class="btn" onclick="filterSelection('adventure')"> Adventure</button>
-              <button class="btn" onclick="filterSelection('thriller')"> Thriller</button>
-              <button class="btn" onclick="filterSelection('cooking')"> Cooking</button>
+                <button class="btn active" onclick="filterSelection('all')"> Show all</button>
+                {% for category in categories %}
+                    <button class="btn" onclick="filterSelection('{{category.id}}')"> {{category.name}}</button>
+                {% endfor %}
             </div>
             
             <!-- Portfolio Gallery Grid -->
             <div class="row">
-              <div class="column scfi">
-                <div class="content">
-                  <img src="https://tse4.mm.bing.net/th?id=OIP.Ul1A_vG3Z7zIJfU9rIobXgAAAA&pid=Api&P=0&w=300&h=300" alt="ScienceFiction" style="width:100%" width="400px" height="550px">
-                </div>
-              </div>
-              <div class="column scfi">
-                <div class="content">
-                <img src="https://prodimage.images-bn.com/pimages/2940158926723_p0_v3_s550x406.jpg" alt="ScienceFiction" style="width:100%" width="400px" height="550px">
-                </div>
-              </div>
-              
-              
-              <div class="column fantasy">
-                <div class="content">
-                  <img src="https://images-na.ssl-images-amazon.com/images/I/51uAHDktCRL._SX324_BO1,204,203,200_.jpg" alt="Fantasy" style="width:100%" width="400px" height="550px">
-                </div>
-              </div>
-              <div class="column fantasy">
-                <div class="content">
-                <img src="https://www.free-ebooks.net/2d_covers/small/1349396506.jpg" alt="Fantasy" style="width:100%" width="400px" height="550px">
-                </div>
-              </div>
 
-              
+                {% for book in main_books %}
 
-              <div class="column humor">
-                <div class="content">
-                <img src="https://tse4.mm.bing.net/th?id=OIP.rAl4h184JPk5FcQPsv9i7gAAAA&pid=Api&P=0&w=300&h=300" alt="Humor" style="width:100%" width="400px" height="550px">
-                </div>
-              </div>
-            
-              <div class="column humor">
-                <div class="content">
-                  <img src="https://tse2.mm.bing.net/th?id=OIP.gsLsUUshiEhl033Dy54QawAAAA&pid=Api&P=0&w=300&h=300" alt="Humor" style="width:100%" width="400px" height="550px">
-                </div>
-              </div>
+                    <div class="column {{book.category.id}}">
+                        <div class="content">
+                            <a href="/bookpage?name={{book.name}}" target="_blank"><img src="{{book.image.url}}" alt="{{book.category.name}}" style="width:100%" width="400px" height="550px"></a>
+                        </div>
+                    </div>
 
-              <div class="column adventure">
-                <div class="content">
-                <img src="https://images-na.ssl-images-amazon.com/images/I/51TMoES6LVL._SX321_BO1,204,203,200_.jpg" alt="Adventure" style="width:100%" width="400px" height="550px">
-                </div>
-              </div>
-            
-              <div class="column adventure">
-                <div class="content">
-                  <img src="https://images-na.ssl-images-amazon.com/images/I/41swSYqFcyL._SX321_BO1,204,203,200_.jpg" alt="Adventure" style="width:100%" width="400px" height="550px">
-                </div>
-              </div>
+               {% endfor %}
 
-              <div class="column thriller">
-                <div class="content">
-                <img src="https://vorablesen.s3.eu-west-1.amazonaws.com/bookishfirst/book/92/cover_image/display-e01a51e8e43a6f98e111bed4ca1d340d.jpg" alt="Thriller" style="width:100%" width="400px" height="550px" >
-                </div>
-              </div>
-            
-              <div class="column thriller">
-                <div class="content">
-                  <img src="https://tse4.mm.bing.net/th?id=OIP.GzQ6ipcjdH5Zdg3sAab2ZwAAAA&pid=Api&P=0&w=300&h=300" alt="Thriller" style="width:100%" width="400px" height="550px">
-                </div>
-              </div>
-
-              <div class="column cooking">
-                <div class="content">
-                <img src="https://tse1.mm.bing.net/th?id=OIP.KmPLvg8OxySTtXJyqcFFpAAAAA&pid=Api&P=0&w=300&h=300" alt="Cooking" style="width:100%" width="400px" height="550px">
-                </div>
-              </div>
-            
-              <div class="column cooking">
-                <div class="content">
-                  <img src="http://www.penguin.com.au/covers/catalog/9780143799689.jpg" alt="Cooking" style="width:100%" width="400px" height="550px">
-                </div>
-              </div>
-              
             <!-- END GRID -->
             </div>
             
             <br>
             <br>
+            <!-- slideshow-->
+             <h2 >New Releases</h2>
 
-            <!-- END MAIN -->
+             <div class="slideshow-container" style="text-align:center">
+                {% for newproduct in newproducts %}
+
+                   <div class="mySlides fade" style="text-align:center">
+                       <div class="numbertext"> {{newproduct.id_number}} / 3</div>
+                       <a href="/newbookpage?name={{newproduct.name}}" target="_blank"><img src="{{newproduct.image.url}}" style="width:47%" width="400px" height="550px" ></a>
+                       <br>
+                       <div class="text" style="color:blue; font-size:22px" ><b>{{newproduct.name}}</b></div>
+                   </div>
+
+                {% endfor %}
+
+             </div>
+            <br>
+
+            <div style="text-align:center">
+              <span class="dot"></span>
+              <span class="dot"></span>
+              <span class="dot"></span>
             </div>
-            
-            <script>
+
+
+        <!-- END MAIN -->
+        </div>
+
+
+
+        <script>
 
             filterSelection("all")
             function filterSelection(c) {
@@ -227,56 +187,32 @@ button2:hover {
               });
             }
 
+
+            var slideIndex = 0;
+            showSlides();
+
+            function showSlides() {
+              var i;
+              var slides = document.getElementsByClassName("mySlides");
+              var dots = document.getElementsByClassName("dot");
+              for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+              }
+              slideIndex++;
+              if (slideIndex > slides.length) {slideIndex = 1}
+              for (i = 0; i < dots.length; i++) {
+                dots[i].className = dots[i].className.replace(" active", "");
+              }
+              slides[slideIndex-1].style.display = "block";
+              dots[slideIndex-1].className += " active";
+              setTimeout(showSlides, 3000); // Change image every 3 seconds
+            }
+
             </script>
-       <!-- slideshow-->
-        <h2 >New Releases</h2>
 
-        <div class="slideshow-container" style="text-align:center">
-        {% for newproduct in newproducts %}
 
-            <div class="mySlides fade" style="text-align:center">
-                <div class="numbertext"> {{newproduct.id_number}} / 3</div>
-                    <a href="/newbookpage?name={{newproduct.name}}" target="_blank"><img src="{{newproduct.image.url}}" style="width:35%" width="400px" height="550px" ></a>
-                    <br>
 
-                <div class="text" style="color:blue; font-size:22px" ><b>{{newproduct.name}}</b></div>
-            </div>
-
-            {% endfor %}
-
-        </div>
         <br>
-
-        <div style="text-align:center">
-          <span class="dot"></span>
-          <span class="dot"></span>
-          <span class="dot"></span>
-        </div>
-
-        <script>
-
-
-        var slideIndex = 0;
-        showSlides();
-
-        function showSlides() {
-          var i;
-          var slides = document.getElementsByClassName("mySlides");
-          var dots = document.getElementsByClassName("dot");
-          for (i = 0; i < slides.length; i++) {
-            slides[i].style.display = "none";
-          }
-          slideIndex++;
-          if (slideIndex > slides.length) {slideIndex = 1}
-          for (i = 0; i < dots.length; i++) {
-            dots[i].className = dots[i].className.replace(" active", "");
-          }
-          slides[slideIndex-1].style.display = "block";
-          dots[slideIndex-1].className += " active";
-          setTimeout(showSlides, 3000); // Change image every 3 seconds
-        }
-        </script>
-
         <footer>
               <div class="foosec">
               <a href="#">FAQ</a>

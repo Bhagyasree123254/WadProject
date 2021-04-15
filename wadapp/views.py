@@ -4,6 +4,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from .models.product import Product
 from .models.category import Category
+from .models.main_books import Main_book
 from .models.new_releases import New_releases
 from .models.customer import Customer
 from .models.downloadbooks import DownloadBook
@@ -13,9 +14,10 @@ from .models.downloadbooks import DownloadBook
 def Home(request):
     categories = Category.get_all_categories()
 
+    mainbooks = Main_book.get_all_main_books()
     newproducts = New_releases.get_all_newreleases()
 
-    return render(request, 'Home.html', {'categories': categories,'newproducts':newproducts})
+    return render(request, 'Home.html', {'categories': categories, 'main_books': mainbooks, 'newproducts': newproducts})
 
 
 

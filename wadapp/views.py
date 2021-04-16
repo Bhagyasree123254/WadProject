@@ -1,23 +1,60 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 
 # Create your views here.
-from django.http import HttpResponse
+
 from .models.product import Product
 from .models.category import Category
 from .models.main_books import Main_book
 from .models.new_releases import New_releases
 from .models.customer import Customer
 from .models.downloadbooks import DownloadBook
+from django.views import View
+
+
+class Home(View):
+
+    def post(self,request):
+        product = request.POST.get('product')
+        remove = request.POST.get('remove')
+        cart = request.session.get('cart')
+        if cart:
+            quantity = cart.get(product)
+            if quantity:
+                if remove:
+                    if quantity <= 1:
+                        cart.pop(product)
+                    else:
+                        cart[product] = quantity-1
+
+                else:
+                    cart[product] = quantity+1
+
+            else:
+                cart[product] = 1
+        else:
+            cart = {}
+            cart[product] = 1
+
+        request.session['cart'] = cart
+        print('Cart',request.session['cart'])
+        return redirect('Home')
+
+    def get(self,request):
+
+        cart = request.session.get('cart')
+        if not cart:
+            request.session['cart'] = {}
+
+
+        categories = Category.get_all_categories()
+        mainbooks = Main_book.get_all_main_books()
+
+        newproducts = New_releases.get_all_newreleases()
 
 
 
-def Home(request):
-    categories = Category.get_all_categories()
+        return render(request, 'Home.html', {'categories': categories, 'main_books': mainbooks,'newproducts': newproducts})
 
-    mainbooks = Main_book.get_all_main_books()
-    newproducts = New_releases.get_all_newreleases()
-
-    return render(request, 'Home.html', {'categories': categories, 'main_books': mainbooks, 'newproducts': newproducts})
 
 
 
@@ -75,7 +112,7 @@ def login(request):
         if customer_mail:
             pass
             if customer_pswd:
-                return Home(request)
+                return Home.as_view()(request)
             else:
                 error_message = 'Email or Password invalid'
         else:

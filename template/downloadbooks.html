@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content1 %}
-
+{% load custom_filter %}
 <h1>Books Available for Download</h1>
 <div class="container-fluid">
 
@@ -13,7 +13,7 @@
     <img src="{{dlbook.image.url}}" class="card-img-top" alt="book">
     <div class="card-body">
       <h5 class="card-title">{{dlbook.name}}</h5>
-      <p class="card-text"><b>Download Price: {{dlbook.dlprice}}</b></p>
+      <p class="card-text"><b>Download Price: {{dlbook.dlprice|currency}}</b></p>
       <a href="{{dlbook.preview.url}}" class="btn btn-primary">Book Preview</a>
       <a href="{{dlbook.download.url}}" class="btn btn-primary">Download</a>
     </div>

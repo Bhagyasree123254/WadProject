@@ -5,28 +5,35 @@ from .models.main_books import Main_book
 from .models.customer import Customer
 from .models.new_releases import New_releases
 from .models.downloadbooks import DownloadBook
+from .models.orders import Order
+
 
 class AdminProduct(admin.ModelAdmin):
-    list_display=['name','price','category']
+    list_display = ['name', 'price', 'category']
+
 
 class AdminCategory(admin.ModelAdmin):
-    list_display=['name']
+    list_display = ['name']
+
 
 class AdminMainBooks(admin.ModelAdmin):
     list_display = ['name', 'category']
 
+
 class AdminNew(admin.ModelAdmin):
     list_display = ['name', 'price', 'category']
 
-class AdminDownloadBooks(admin.ModelAdmin):
-    list_display = ['name','dlprice', 'category']
 
-admin.site.register(Customer)
+class AdminDownloadBooks(admin.ModelAdmin):
+    list_display = ['name', 'dlprice', 'category']
+
+
 # Register your models here.
 
-
+admin.site.register(Customer)
 admin.site.register(Product, AdminProduct)
 admin.site.register(Category, AdminCategory)
 admin.site.register(Main_book, AdminMainBooks)
 admin.site.register(New_releases, AdminNew)
-admin.site.register(DownloadBook,AdminDownloadBooks)
+admin.site.register(DownloadBook, AdminDownloadBooks)
+admin.site.register(Order)

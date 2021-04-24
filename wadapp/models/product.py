@@ -32,3 +32,7 @@ class Product(models.Model):
         else:
             return Product.get_all_products();
 
+    @staticmethod
+    def get_products_by_id(ids):
+        return Product.objects.filter(id__in=ids)
+

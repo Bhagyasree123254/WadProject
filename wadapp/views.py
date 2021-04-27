@@ -9,7 +9,10 @@ from .models.new_releases import New_releases
 from .models.customer import Customer
 from .models.downloadbooks import DownloadBook
 from django.views import View
-
+from django.db.models import Q
+from django.core.exceptions import ObjectDoesNotExist
+from django.contrib import messages,auth
+from django.http import *
 
 class Home(View):
 
@@ -112,6 +115,7 @@ def login(request):
         if customer_mail:
             pass
             if customer_pswd:
+                email = request.session['email'] = customer_mail.email
                 return Home.as_view()(request)
             else:
                 error_message = 'Email or Password invalid'
@@ -168,6 +172,7 @@ def profile(request):
         if not error_message:
 
             customer.register()
+            email = request.session['email'] = customer.email
             return Home(request)
         else:
             data={
@@ -186,4 +191,23 @@ class Cart(View):
         products = Product.get_products_by_id(ids)
         print(products)
         return render(request,'cart.html',{'products':products})
+
+def search(request):
+        if request.method == 'POST':
+            srch = request.POST.get('srh')
+            if srch:
+                match = Product.objects.filter(Q(name__icontains=srch))
+                if match:
+                    return render(request, 'search.html', {'sr': match})
+                else:
+                    return render(request, 'notfound.html')
+
+            else:
+                return HttpResponseRedirect("/")
+        return render(request, 'search.html')
+
+
+def myaccount(request):
+    email = request.session.get('email')
+    return render(request, 'myaccount.html', {'email': email})
 

@@ -13,5 +13,7 @@ urlpatterns = [
     path('new_releases', views.new_releases, name='new_releases'),
     path('logout', logout, name='logout'),
     path('cart', Cart.as_view(), name="cart"),
+    path('search', views.search, name='search'),
+    path('myaccount', views.myaccount, name='myaccount'),
 
 ]

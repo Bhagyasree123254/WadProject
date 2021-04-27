@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% block content1 %}
+{% load cart %}
+{% load custom_filter %}
+
+    <div>
+        {% if messages %}
+            <ul class="messages">
+                {% for k in messages %}
+
+               <p style="color:yellow; font-size:29px;text-align:center;">{{ k }}</p>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div><br>
+    <div >
+        {% if sr %}
+            {% for k in sr %}
+<h1>{{k.name}}</h1>
+    <p><img src="{{k.image.url}}" alt="adv1" style="float: left; padding: 10px" width="230px" height="330px">
+    <br>
+    <h3>Price: {{k.price|currency}}</h3>
+<a href="{{k.preview.url}}">
+    <button style="background-color: orange;
+                    color: black;
+                    padding: 14px 20px;
+                    margin: 8px 0;
+                    border: none;
+                    cursor: pointer;
+                    width: 15%;
+                    font-size: 20px;
+                    text-align: center;
+                    margin-left: 10px;">Book Preview</button></a>
+    <br>
+        <div class ="row">
+
+        {% if k|is_in_cart:request.session.cart %}
+
+            <div class="btn-group">
+                <form action="/Home" method="post">
+                    {% csrf_token %}
+                    <input hidden type="text" name='product' value='{{k.id}}'>
+                    <input hidden type="text" name='remove' value='True'>
+                    <input type="submit" value =" - " class="btn-block btn-lg btn-secondary">
+                </form>
+
+                <div class="text-center col-2 btn-block btn-lg btn-info">{{k|cart_quantity:request.session.cart}} in Cart</div>
+
+                <form action="/Home" method="post">
+                    {% csrf_token %}
+                    <input hidden type="text" name='product' value='{{k.id}}'>
+                    <input type="submit" value =" + " class="btn-block btn-lg btn-secondary">
+                </form>
+            </div>
+
+        {% else %}
+
+        <form action="/Home" method="POST" >
+            {% csrf_token %}
+            <input hidden type="text" name='product' value='{{k.id}}'>
+            <input type="submit" value="Add To Cart" class="col-3 btn-lg btn-primary">
+
+        </form>
+        {% endif %}
+    </div>
+
+
+
+    </p>
+
+<br>
+<br>
+<br>
+<br>
+<h2> Book Description</h2>
+    <p>
+       {{k.description}}
+    </p>
+    <h2>About the author</h2>
+    <p>
+       {{k.aboutauthor}}
+    </p>
+        {% endfor %}
+        {% endif %}
+    </div>
+{% endblock %}

@@ -39,8 +39,9 @@
         <br>
         <br>
         <div class="search">
-        <form action="">
-          <input type="text" placeholder="Search the book you want.." name="search">
+        <form method="post" action="/search">
+        {% csrf_token %}
+         <input type="text" placeholder="Search here.." name="srh">
           <button type="submit"><i class="fa fa-fw fa-search" style="font-size: 28px; padding-bottom: 7px;"></i></button>
             <a href="/logout"><button2 style=" width: 10%; background-color: blueviolet; margin-left: 5px;"><i style="color: white;"></i>Logout</button2></a>
             <a href="/cart"><button2 style=" width: 10%; background-color: #e6400e; margin-left: 5px;"><i class="fa fa-shopping-cart" style="color: white;"></i>My Cart</button2></a>

@@ -1,12 +1,14 @@
 <!DOCTYPE html>
-
+{% load static %}
 {% load custom_filter %}
+
 <html>
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title></title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="{%  static  'css/base1.css'  %}" rel="stylesheet">
 
         <!-- font awesome -->
         <script src="https://kit.fontawesome.com/dbed6b6114.js" crossorigin="anonymous"></script>
@@ -14,6 +16,7 @@
 
       <style>
         @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700;900&display=swap');
+
 
 :root{
     --white-light: rgba(255, 255, 255, 0.5);
@@ -294,10 +297,15 @@ img{
     </head>
     <body style="background-color:rgb(226, 162, 141)" >
 
+        <div class="topnav" style="margin: 5px">
+            <a href="{% url 'Home' %}"><i class="fa fa-fw fa-home"></i>Home</a>
+
+            <a href="/cart" style="float: right;"><i class="fa fa-shopping-cart"></i>My Cart</a>
+
+        </div>
+
         <div class = "products">
             <div class = "container">
-                <h1 class = "lg-title">{{categories.name}}</h1>
-                <p class = "text-light">just dive into fantasy world </p>
 
                 <div class = "product-items">
                     {% for product in products %}
@@ -305,21 +313,14 @@ img{
                     <div class = "product">
                         <div class = "product-content">
                             <div class = "product-img">
-                                <a href="/bookpage?name={{product.name}}" ><img src = "{{product.image.url}}" alt = "product image"></a>
+                                <a href="/bookpage?name={{product.name}}" ><img src = "{{product.image.url}}" alt = "product image" style="width:200px ; height:350px; padding-right:5px"></a>
                             </div>
-                            <br>
                             <br>
                             <br>
                             <div class = "product-btns">
                                 <form action="/" method="POST">
                                     <input hidden type="text" value="{{product.id}}">
                                     {% csrf_token %}
-                                    <button type = "button" class = "btn-cart"> add to cart
-                                        <span><i class = "fas fa-plus"></i></span>
-                                    </button></form>
-                                <button type = "button" class = "btn-buy"> buy now
-                                    <span><i class = "fas fa-shopping-cart"></i></span>
-                                </button>
                             </div>
 
 

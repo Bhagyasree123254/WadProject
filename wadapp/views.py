@@ -7,6 +7,7 @@ from .models.category import Category
 from .models.main_books import Main_book
 from .models.new_releases import New_releases
 from .models.customer import Customer
+from .models.orders import Order
 from .models.downloadbooks import DownloadBook
 from django.views import View
 from django.db.models import Q
@@ -116,7 +117,7 @@ def login(request):
             pass
             if customer_pswd:
                 email = request.session['email'] = customer_mail.email
-                return Home.as_view()(request)
+                return redirect('Home')
             else:
                 error_message = 'Email or Password invalid'
         else:
@@ -207,7 +208,47 @@ def search(request):
         return render(request, 'search.html')
 
 
+
+
+class checkout(View):
+    def post(self, request):
+        pd=request.POST
+        email = pd.get('email')
+        print(email)
+        customer = Customer.get_by_email(email)
+        cart = request.session.get('cart')
+        print(request.POST)
+        print(customer)
+
+        products = Product.get_products_by_id(list(cart.keys()))
+        print(cart, products)
+        for product in products:
+            order=Order(product=product,customer=customer,quantity=cart.get(str(product.id)),price=product.price,address=request.POST.get('address'),phone=request.POST.get('phone'))
+            order.placeOrder();
+            order.save()
+        request.session['cart']={}
+        return redirect('checkout')
+
+    def get(self, request):
+        return render(request, 'checkout.html')
+
+
+
+class orders(View):
+
+    def get(self,request):
+        email = request.session.get('email')
+        print(email)
+        customer = Customer.get_by_email(email)
+
+        print(customer)
+        orders= Order.get_orders_by_customer(str(customer.id))
+        print(orders)
+
+        return render(request,'orders.html',{'orders':orders})
+
+
+
 def myaccount(request):
     email = request.session.get('email')
     return render(request, 'myaccount.html', {'email': email})
-

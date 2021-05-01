@@ -6,7 +6,7 @@ from .models.customer import Customer
 from .models.new_releases import New_releases
 from .models.downloadbooks import DownloadBook
 from .models.orders import Order
-
+from .models.usedbooks import Usedbook
 
 class AdminProduct(admin.ModelAdmin):
     list_display = ['name', 'price', 'category']
@@ -27,6 +27,9 @@ class AdminNew(admin.ModelAdmin):
 class AdminDownloadBooks(admin.ModelAdmin):
     list_display = ['name', 'dlprice', 'category']
 
+class AdminUsedBook(admin.ModelAdmin):
+    list_display = ['name', 'price', 'category']
+
 
 # Register your models here.
 
@@ -37,3 +40,4 @@ admin.site.register(Main_book, AdminMainBooks)
 admin.site.register(New_releases, AdminNew)
 admin.site.register(DownloadBook, AdminDownloadBooks)
 admin.site.register(Order)
+admin.site.register(Usedbook, AdminUsedBook)

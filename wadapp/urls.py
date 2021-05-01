@@ -17,5 +17,5 @@ urlpatterns = [
     path('myaccount', views.myaccount, name='myaccount'),
     path('checkout', checkout.as_view(), name="checkout"),
     path('orders', orders.as_view(), name="orders"),
-
+    path('usedbooks',views.usedbooks,name='usedbooks'),
 ]

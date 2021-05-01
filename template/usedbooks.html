@@ -1,11 +1,10 @@
 <!DOCTYPE html>
-
 {% load cart %}
 {% load custom_filter %}
 
 <html>
 <head>
-    <title>New Releases Book Page</title>
+    <title>UsedBook Page</title>
      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
     <link
  href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
@@ -22,19 +21,19 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 
   .monospaced { font-family: 'Ubuntu Mono', monospaced ; }
 
-  
+
 </style>
 
 
 <body style="background-color: rgb(211, 214, 214);">
 
-{% for product in products1 %}
+{% for usedbook in usedbooks %}
 <br>
 <div class="container" id="product-section">
   <div class="row">
    <div class="col-md-5">
     <img
-  src="{{product.image.url}}"
+  src="{{usedbook.image.url}}"
   alt="book"
   class="image-responsive" width="350px" height="500px"
  />
@@ -42,12 +41,12 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
    <div class="col-md-7">
        <div class="row">
            <div class="col-md-12">
-               <h1>{{product.name}}</h1>
+               <h1>{{usedbook.name}}</h1>
             </div>
        </div>
         <div class="row" style="font-size: 20px;">
           <div class="col-md-12">
-              <span class="label label-primary">{{product.category}}</span>
+              <span class="label label-primary">{{usedbook.category}}</span>
           </div>
         </div>
         <br>
@@ -62,7 +61,7 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
            <span class="label label-success">61</span>
            </div>
 
-            
+
        </div>
 
        <span class="sr-only">Four out of Five Stars</span>
@@ -70,47 +69,47 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 
         <div class="row">
             <div class="col-md-12 bottom-rule">
-                <h2 class="product-price">{{product.price|currency}}</h2>
+                <h2 class="product-price">{{usedbook.price|currency}}</h2>
             </div>
         </div>
 
 <hr>
 
    <div class="row">
-    {% if product|is_in_cart:request.session.cart %}
+    {% if usedbook|is_in_cart:request.session.cart %}
         <div class="col-md-6">
             <div class="btn-group-justified">
-                
+
                 <form action="/Home" method="post">
                     {% csrf_token %}
-                    <input hidden type="text" name='product' value='{{product.id}}'>
+                    <input hidden type="text" name='product' value='{{usedbook.id}}'>
                     <input hidden type="text" name='remove' value='True'>
                     <input type="submit" value =" - " class="col-7 btn-lg btn-secondary">
                 </form>
 
-                <div class="text-center col-7 btn-lg btn-info">{{product|cart_quantity:request.session.cart}} in Cart</div>
-                
+                <div class="text-center col-7 btn-lg btn-info">{{usedbook|cart_quantity:request.session.cart}} in Cart</div>
+
                 <form action="/Home" method="post">
                     {% csrf_token %}
-                    <input hidden type="text" name='product' value='{{product.id}}'>
+                    <input hidden type="text" name='product' value='{{usedbook.id}}'>
                     <input type="submit" value =" + " class="col-7 btn-lg btn-secondary">
                 </form>
-            
+
            </div>
-        </div>   
+        </div>
         {% else %}
             <div class="col-md-6">
                 <form action="/Home" method="POST" >
                     {% csrf_token %}
-                    <input hidden type="text" name='product' value='{{product.id}}'>
+                    <input hidden type="text" name='product' value='{{usedbook.id}}'>
                     <input type="submit" value="Add To Cart" class="col-7 btn-lg btn-info">
 
                 </form>
-            </div>   
+            </div>
         {% endif %}
             <div class="col-md-5">
 
-                <a href="{{product.preview.url}}">
+                <a href="{{usedbook.preview.url}}">
                 <button type="button" class=" btn-lg btn-success">Book Preview</button></a>
             </div>
    </div><!-- end row -->
@@ -153,13 +152,13 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
             <div role="tabpanel" class="tab-pane active" id="description">
                 <br>
                 <p class="top-10">
-                 {{product.description}}
+                 {{usedbook.description}}
                 </p>
             </div>
             <div role="tabpanel" class="tab-pane top-10" id="aboutauthor">
                 <br>
                 <p class="top-10">
-                 {{product.about_author}}
+                 {{usedbook.aboutauthor}}
                 </p>
             </div>
             <div role="tabpanel" class="tab-pane" id="reviews">
@@ -176,13 +175,13 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 {% endfor %}
 
 
-<script 
-     src="https://code.jquery.com/jquery-2.2.2.min.js" 
-     integrity="sha256-36cp2Co+/62rEAAYHLmRCPIych47CvdM+uTBJwSzWjI=" 
+<script
+     src="https://code.jquery.com/jquery-2.2.2.min.js"
+     integrity="sha256-36cp2Co+/62rEAAYHLmRCPIych47CvdM+uTBJwSzWjI="
      crossorigin="anonymous"></script>
- <script 
-     src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" 
-     integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" 
+ <script
+     src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
+     integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
      crossorigin="anonymous"></script>
 </body>
 </html>

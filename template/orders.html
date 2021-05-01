@@ -38,8 +38,8 @@
                 <th>Price</th>
                 <th>Quantity</th>
                 <th>Total</th>
-                <th>return</th>
-                <th>status</th>
+                <th>Return</th>
+                <th>Status</th>
 
             </tr>
         </thead>
@@ -48,17 +48,18 @@
 
             <tr>
                 <td>{{forloop.counter}}</td>
-                <td><img style="height: 100px" class="rounded-circle" src="{{order.product.image.url}}" alt="product"></td>
-                <td>{{order.product.name}}</td>
+                <td><img style="height: 100px" class="rounded-circle" src="{{order|find_by_image}}" alt="product"></td>
+                <td>{{order|find_by_price}}</td>
+
                 <td>{{order.date}}<td>
                 <td>{{order.price|currency}}</td>
                 <td>{{order.quantity}}</td>
                 <td>{{order.quantity|multiply:order.price|currency}}</td>
-                <td><button style="float:left; font-size: 20px;">return</button></td>
+                <td><button type="button" class="btn btn-info" style="float:left; font-size: 20px;">Return</button></td>
                 {%if order.status %}
-                <td><small style="color:green">successful</small></td>
+                <td><small style="color:green"><b>Successful</b></small></td>
                 {%else%}
-                <td><small style="color:red">pending</small></td>
+                <td><small style="color:red"><b>Pending</b></small></td>
                  {%endif%}
             </tr>
             {% endfor %}

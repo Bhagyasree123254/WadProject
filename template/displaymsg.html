@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Message</title>
+    <style>
+
+        body, html {
+            height: 100%;
+            margin: 0;
+        }
+
+        .bg{
+            background-image: url("https://images.unsplash.com/photo-1527176930608-09cb256ab504?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8MnwyMjI4OTkyfHxlbnwwfHx8fA%3D%3D&w=1000&q=80");
+
+            height: 100%;
+
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        .alert {
+           width: 52%;
+           padding: 15px;
+           background-color: #04AA6D;
+           color: white;
+        }
+
+        .closebtn {
+             margin-left: 15px;
+            color: white;
+            font-weight: bold;
+            float: right;
+            font-size: 22px;
+            line-height: 20px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .closebtn:hover {
+             color: black;
+        }
+
+        .as1{
+        width: 50%;
+        padding: 10px;
+        background-color: #2196F3;
+        color: white;
+        }
+
+        .as2{
+        width: 50%;
+        padding: 5px;
+        background-color: #ff9800;
+        color: white;
+        }
+    </style>
+</head>
+
+<body>
+<div class="bg">
+    <p style="padding-top:7%"></p>
+<div class="alert">
+
+    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+    <strong>Success!</strong> Your Bank Account Details Inserted Successfully.
+</div>
+<br>
+<br>
+<br>
+<div class="as1">
+    <h3>Money will be refunded to your account.</h3>
+    <h3>We promise that this mistake due to which you are returning the book will never happen again.</h3>
+</div>
+<br>
+<br>
+<br>
+<div class="as2">
+    <h3>We are happy to Welcome more purchases from you.</h3>
+    <center><h2>THANK YOU!!</h2></center>
+</div>
+<br>
+    <h4 style="font-size:18px;padding-left:17%;">Click <a href="{% url 'Home' %}">Here</a> to go back to Home. </h4>
+</div>
+</body>
+</html>

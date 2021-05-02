@@ -1,7 +1,9 @@
 <!DOCTYPE html>
+
 {% load static %}
 {% load cart %}
 {% load custom_filter %}
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -17,10 +19,45 @@
     <style>
     body {
         background-color: rgb(204, 209, 218);
-  }
+    }
+
+
+    .as {
+        text-decoration: none;
+        display: inline-block;
+        margin-left: 43%;
+
+    }
+
+    .as ,a:hover {
+        background-color: #ddd;
+        color: black;
+    }
+
+    .previous {
+        font-size:23px;
+        background-color: #FF4500;
+        color: white;
+    }
+
+    .round {
+        border-radius: 50%;
+
     </style>
 
+
+     <script>
+        function showAlert() {
+             alert ("This order has not been confirmed yet!");
+        }
+
+        function AlertMsg() {
+             alert ("This book has already been returned!");
+        }
+     </script>
 </head>
+
+
 <body>
 <div class="container" style="background-color: rgb(218, 235, 187);font-size: 22px; font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif">
 <div class="border rounded p-4 m-4">
@@ -38,8 +75,9 @@
                 <th>Price</th>
                 <th>Quantity</th>
                 <th>Total</th>
+                <th>status</th>
+                <th>return_status</th>
                 <th>Return</th>
-                <th>Status</th>
 
             </tr>
         </thead>
@@ -48,19 +86,41 @@
 
             <tr>
                 <td>{{forloop.counter}}</td>
-                <td><img style="height: 100px" class="rounded-circle" src="{{order|find_by_image}}" alt="product"></td>
-                <td>{{order|find_by_price}}</td>
-
+                <td><img style="height: 100px" class="rounded-circle" src="{{order.product.image.url}}" alt="product"></td>
+                <td>{{order.product.name}}</td>
                 <td>{{order.date}}<td>
                 <td>{{order.price|currency}}</td>
                 <td>{{order.quantity}}</td>
                 <td>{{order.quantity|multiply:order.price|currency}}</td>
-                <td><button type="button" class="btn btn-info" style="float:left; font-size: 20px;">Return</button></td>
+
                 {%if order.status %}
-                <td><small style="color:green"><b>Successful</b></small></td>
+                <td><small style="color:green">successful</small></td>
                 {%else%}
-                <td><small style="color:red"><b>Pending</b></small></td>
+                <td><small style="color:red">pending</small></td>
                  {%endif%}
+
+                {%if order.status %}
+                     {%if order.return_status %}
+                        <td><small style="color:green">returned</small></td>
+                     {%else%}
+                        <td><small style="color:red">kept</small></td>
+                    {%endif%}
+                {%else%}
+                    <td></td>
+                {% endif %}
+
+                {%if order.status %}
+                    {%if order.return_status %}
+                        <td><button type="button" class="btn btn-info" style="float:left;font-size: 20px;" onclick="AlertMsg()">return</button></td>
+                    {%else%}
+                        <td><a href="{% url 'returnbook' %}"><button type="button" class="btn btn-info" style="float:left;font-size: 20px;">return</button></a></td>
+
+                    {% endif %}
+
+                {%else%}
+                    <td><button type="button" class="btn btn-info" style="float:left;font-size: 20px;" onclick="showAlert()">return</button></td>
+                {% endif %}
+
             </tr>
             {% endfor %}
         </tbody>
@@ -71,9 +131,11 @@
     <br>
 
 </div>
-
 </div>
 
+<div class="as">
+ <a href="{% url 'Home' %}" class="previous">&laquo; Previous</a>
+</div>
 
 </body>
 </html>

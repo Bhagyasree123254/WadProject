@@ -303,3 +303,15 @@ def usedbooks(request):
         usedbooks = Usedbook.get_all_usedbooks()
 
     return render(request, 'usedbooks.html', {'usedbooks': usedbooks})
+
+
+def returnbook(request):
+    return render(request, 'returnbook.html')
+
+
+def refund(request):
+    return render(request, 'refund.html')
+
+
+def displaymsg(request):
+    return render(request, 'displaymsg.html')

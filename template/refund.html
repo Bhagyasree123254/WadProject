@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Refund</title>
+
+<script>
+function validateForm() {
+  var n = document.forms["myForm"]["Account Number"].value;
+  if (n == "") {
+    window.alert("Please enter your Bank Account Number.");
+    return false;
+  }
+  var n1 = document.forms["myForm"]["Confirm"].value;
+  if (n1 == "") {
+    window.alert("Please confirm your Account Number.");
+    return false;
+  }
+
+  if (n != n1){
+    window.alert("Make sure you enter correct Account Number.");
+    return false;
+  }
+
+  var code = document.forms["myForm"]["Ifsc Code"].value;
+  if (code == "") {
+    window.alert("Please enter IFSC code.");
+    return false;
+  }
+}
+</script>
+
+<style>
+
+            input[type=text], select, textarea {
+                width: 50%;
+                padding: 10px;
+                border: 2px solid #ccc;
+                border-radius: 4px;
+                box-sizing: border-box;
+                margin-top: 6px;
+                margin-bottom: 13px;
+
+            }
+
+            input[type=submit] {
+            background-color: #04AA6D;
+            color: white;
+            padding: 10px 12px;
+            border: none;
+            border-radius: 2px;
+            cursor: pointer;
+            }
+
+            input[type=reset] {
+            background-color: rgb(15, 75, 240);
+            color: white;
+            padding: 10px 12px;
+            border: none;
+            border-radius: 2px;
+            cursor: pointer;
+            }
+
+            .container {
+              margin: 0 auto;
+			  width: 700px;
+              border: 5px solid black;
+              background-color: #f2f2f2;
+              padding: 20px;
+            }
+
+			p{
+            padding: 12px 14px;
+            text-decoration: none;
+            font-size: 23px;
+            font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif ;
+			}
+		</style>
+</head>
+
+
+<body>
+<h2 style="text-align: center;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 30px;
+    color: #FF7F50">
+    REFUND REQUEST FORM
+</h2>
+<br>
+<br>
+
+<div class="container">
+<form name="myForm" action="/displaymsg" onsubmit="return validateForm()" method="post">
+    {% csrf_token %}
+    <p>Account Number : <input type="text"
+                               name="Account Number" /></p>
+
+    <p>Confirm Account Number : <input type="text"
+                                       name="Confirm" /></p>
+
+    <p> IFSC Code : <input type="text"
+                                       name="Ifsc Code" /></p>
+
+
+    <p>Drop your Comments below(if any) :</p>
+    <p><textarea cols="55"
+							name="Comment"> </textarea></p>
+
+    <center>
+    <input style="font-size:18px" type="submit"
+                    value="Submit" name="Submit" />
+    <input style="font-size:18px" type="reset"
+					value="Clear" name="Clear" />
+    </center>
+
+</form>
+</div>
+
+</body>
+</html>

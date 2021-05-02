@@ -18,4 +18,7 @@ urlpatterns = [
     path('checkout', checkout.as_view(), name="checkout"),
     path('orders', orders.as_view(), name="orders"),
     path('usedbooks',views.usedbooks,name='usedbooks'),
+    path('returnbook', views.returnbook, name='returnbook'),
+    path('refund', views.refund, name='refund'),
+    path('displaymsg', views.displaymsg, name='displaymsg'),
 ]

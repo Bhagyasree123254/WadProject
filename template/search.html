@@ -1,86 +1,401 @@
-{% extends 'base.html' %}
-{% block content1 %}
-{% load cart %}
+<!DOCTYPE html>
+{% load static %}
 {% load custom_filter %}
 
-    <div>
-        {% if messages %}
-            <ul class="messages">
-                {% for k in messages %}
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>category</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="{%  static  'css/base1.css'  %}" rel="stylesheet">
 
-               <p style="color:yellow; font-size:29px;text-align:center;">{{ k }}</p>
-                {% endfor %}
-            </ul>
-        {% endif %}
-    </div><br>
-    <div >
-        {% if sr %}
+        <!-- font awesome -->
+        <script src="https://kit.fontawesome.com/dbed6b6114.js" crossorigin="anonymous"></script>
+
+
+      <style>
+        @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700;900&display=swap');
+
+
+:root{
+    --white-light: rgba(255, 255, 255, 0.5);
+    --alice-blue: #f8f9fa;
+    --carribean-green: #40c9a2;
+    --gray: #ededed;
+}
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+body{
+    font-family: 'Quicksand', sans-serif;
+    background-color:rgb(226, 162, 141);
+}
+
+/* Utility stylings */
+img{
+    width: 100%;
+    display: block;
+}
+.container{
+    width: 80vw;
+
+    margin: 0 auto;
+}
+.lg-title,
+.md-title,
+.sm-title{
+    font-family: 'Roboto', sans-serif;
+    padding: 0.6rem 0;
+    text-transform: capitalize;
+}
+.lg-title{
+    font-size: 2.5rem;
+    font-weight: 500;
+    text-align: center;
+    padding: 1.3rem 0;
+    opacity: 0.9;
+}
+/*.md-title{
+    font-size: 2rem;
+    font-family: 'Roboto', sans-serif;
+}*/
+.sm-title{
+    font-weight: 300;
+    font-size: 1rem;
+    text-transform: uppercase;
+}
+.text-light{
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.5;
+    opacity: 0.5;
+    margin: 0.4rem 0;
+}
+
+/* product section */
+.products{
+    background: var(--alice-blue);
+    background-color:rgb(220, 220, 224);
+    padding: 3.2rem 0;
+}
+.products .text-light{
+    text-align: center;
+    width: 100%;
+    margin: 0.9rem auto;
+}
+.product{
+    margin: 2rem;
+    position: relative;
+}
+.product-content{
+    background: var(--gray);
+    padding: 2rem 0.5rem 5rem 2rem;
+    cursor: pointer;
+}
+.product-img{
+    background: var(--white-light);
+    box-shadow: 0 0 20px 40px var(--white-light);
+    width: 175px;
+    height: 175px;
+    margin: 0 auto;
+    border-radius:50%;
+    transition: background 0.5s ease;
+}
+
+.product-btns{
+    display: flex;
+    justify-content: center;
+    margin-top: 5rem;
+    opacity: 0;
+    transition: opacity 0.6s ease;
+}
+
+.btn-cart, .btn-buy{
+    background: transparent;
+    border: 1px solid black;
+    padding: 0.8rem 0;
+    width: 125px;
+    font-family: inherit;
+    text-transform: uppercase;
+    cursor: pointer;
+    border: none;
+    transition: all 0.6s ease;
+}
+.btn-cart{
+    background: black;
+    color: white;
+}
+.btn-cart:hover{
+    background: var(--carribean-green);
+}
+.btn-buy{
+    background: white;
+}
+.btn-buy:hover{
+    background: var(--carribean-green);
+    color: #fff;
+}
+.product-info{
+    background: white;
+    padding: 2rem;
+}
+.product-info-top{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.rating span{
+    color: var(--carribean-green);
+}
+.product-name{
+    color: black;
+    display: block;
+    text-decoration: none;
+    font-size: 1rem;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+.product-price{
+    padding-top: 0.6rem;
+    padding-right: 0.6rem;
+    display: inline-block;
+}
+.product-price:first-of-type{
+    text-decoration: line-through;
+    color: var(--carribean-green);
+}
+.product-img img{
+    transition: transform 0.6s ease;
+}
+.product:hover .product-img img{
+    transform: scale(1.1);
+}
+.product:hover .product-img{
+    background: var(--carribean-green);
+}
+.product:hover .product-btns{
+    opacity: 1;
+}
+.off-info .sm-title{
+    background: var(--carribean-green);
+    color: white;
+    display: inline-block;
+    padding: 0.5rem;
+    position: absolute;
+    top: 0;
+    left: 0;
+    writing-mode: vertical-lr;
+    transform: rotate(180deg);
+    z-index: 1;
+    letter-spacing: 3px;
+    cursor: pointer;
+}
+
+/* product collection */
+.product-collection{
+    padding: 3.2rem 0;
+}
+.product-collection-wrapper{
+    padding: 3.2rem 0;
+}
+.product-col-left{
+    background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.3)), url("images/fashion-img-1.jpg") center/cover no-repeat;
+}
+.product-col-r-top{
+    background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.3)), url("images/fashion-img-2.png") center/cover no-repeat;
+}
+.flex{
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    height: 50vh;
+    padding: 2rem 1.5rem 3.2rem;
+    margin: 5px;
+}
+.product-col-r-bottom > div:first-child{
+    background: #eaa001;
+}
+.product-col-r-bottom > div:last-child{
+    background: #0090ff;
+}
+.product-col-content{
+    text-align: center;
+    color: white;
+}
+.product-collection .text-light{
+    opacity: 1;
+    font-size: 0.8;
+    font-weight: 400;
+    line-height: 1.7;
+}
+.btn-dark{
+    background: black;
+    color: white;
+    outline: 0;
+    border-radius: 25px;
+    padding: 0.7rem 1rem;
+    border: 0;
+    margin-top: 1rem;
+    cursor: pointer;
+    transition: all 0.6s ease;
+    font-size: 1rem;
+    font-family: inherit;
+}
+.btn-dark:hover{
+    background: var(--carribean-green);
+}
+
+
+
+
+
+
+
+/* Media Queries */
+@media screen and (min-width: 992px){
+    .product-items{
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .product-col-r-bottom{
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+@media screen and (min-width: 1200px){
+    .product-items{
+        grid-template-columns: repeat(3, 1fr);
+    }
+    .product{
+        margin-right: 1rem;
+        margin-left: 1rem;
+    }
+    .products .text-light{
+        width: 50%;
+    }
+}
+
+@media screen and (min-width: 1336px){
+    .product-items{
+        grid-template-columns: repeat(4, 1fr);
+    }
+    .product-collection-wrapper{
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .flex{
+        height: 60vh;
+    }
+    .product-col-left{
+        height: 121.5vh;
+    }
+}
+      </style>
+    </head>
+    <body style="background-color:rgb(226, 162, 141)" >
+
+        <div class="topnav" style="margin: 5px">
+            <a href="{% url 'Home' %}"><i class="fa fa-fw fa-home"></i>Home</a>
+
+            <a href="/cart" style="float: right;"><i class="fa fa-shopping-cart"></i>My Cart</a>
+
+        </div>
+
+        <div class = "products">
+            <div class = "container">
+
+                <div class = "product-items">
+                    {% if sr %}
             {% for k in sr %}
-<h1>{{k.name}}</h1>
-    <p><img src="{{k.image.url}}" alt="adv1" style="float: left; padding: 10px" width="230px" height="330px">
-    <br>
-    <h3>Price: {{k.price|currency}}</h3>
-<a href="{{k.preview.url}}">
-    <button style="background-color: orange;
-                    color: black;
-                    padding: 14px 20px;
-                    margin: 8px 0;
-                    border: none;
-                    cursor: pointer;
-                    width: 15%;
-                    font-size: 20px;
-                    text-align: center;
-                    margin-left: 10px;">Book Preview</button></a>
-    <br>
-        <div class ="row">
 
-        {% if k|is_in_cart:request.session.cart %}
+            <div class = "product">
+                        <div class = "product-content">
+                            <div class = "product-img">
+                                <a href="/bookpage?name={{k.name}}" ><img src = "{{k.image.url}}" alt = "product image" style="width:200px ; height:350px; padding-right:5px"></a>
+                            </div>
+                            <br>
+                            <br>
+                            <div class = "product-btns">
+                                <form action="/" method="POST">
+                                    <input hidden type="text" value="{{k.id}}">
+                                    {% csrf_token %}
+                                </form>
+                            </div>
 
-            <div class="btn-group">
-                <form action="/Home" method="post">
-                    {% csrf_token %}
-                    <input hidden type="text" name='product' value='{{k.id}}'>
-                    <input hidden type="text" name='remove' value='True'>
-                    <input type="submit" value =" - " class="btn-block btn-lg btn-secondary">
-                </form>
 
-                <div class="text-center col-2 btn-block btn-lg btn-info">{{k|cart_quantity:request.session.cart}} in Cart</div>
+                        </div>
+                        <br>
 
-                <form action="/Home" method="post">
-                    {% csrf_token %}
-                    <input hidden type="text" name='product' value='{{k.id}}'>
-                    <input type="submit" value =" + " class="btn-block btn-lg btn-secondary">
-                </form>
-            </div>
 
-        {% else %}
+                        <div class = "product-info">
+                            <div class = "product-info-top">
 
-        <form action="/Home" method="POST" >
-            {% csrf_token %}
-            <input hidden type="text" name='product' value='{{k.id}}'>
-            <input type="submit" value="Add To Cart" class="col-3 btn-lg btn-primary">
 
-        </form>
+
+
+                            </div>
+                            <a href = "#" class = "product-name">{{k.name}}</a>
+                            <p class = "product-price">{{k.price|currency}}</p>
+                            <p class = "product-price">{{k.price|currency}}</p>
+                        </div>
+
+                        <div class = "off-info">
+                            <h2 class = "sm-title">25% off</h2>
+                        </div>
+                    </div>
+    {% endfor %}
         {% endif %}
-    </div>
+
+        {% if sr1 %}
+            {% for k in sr1 %}
+                <div class = "product">
+                        <div class = "product-content">
+                            <div class = "product-img">
+                                <a href="/newbookpage?name={{k.name}}" ><img src = "{{k.image.url}}" alt = "product image" style="width:200px ; height:350px; padding-right:5px"></a>
+                            </div>
+                            <br>
+                            <br>
+                            <div class = "product-btns">
+                                <form action="/" method="POST">
+                                    <input hidden type="text" value="{{k.id}}">
+                                    {% csrf_token %}
+                                </form>
+                            </div>
+
+
+                        </div>
+                        <br>
+
+
+                        <div class = "product-info">
+                            <div class = "product-info-top">
 
 
 
-    </p>
 
-<br>
-<br>
-<br>
-<br>
-<h2> Book Description</h2>
-    <p>
-       {{k.description}}
-    </p>
-    <h2>About the author</h2>
-    <p>
-       {{k.aboutauthor}}
-    </p>
+                            </div>
+                            <a href = "#" class = "product-name">{{k.name}}</a>
+                            <p class = "product-price">{{k.price|currency}}</p>
+                            <p class = "product-price">{{k.price|currency}}</p>
+                        </div>
+
+                        <div class = "off-info">
+                            <h2 class = "sm-title">25% off</h2>
+                        </div>
+                    </div>
+
         {% endfor %}
         {% endif %}
-    </div>
-{% endblock %}
+
+                </div>
+            </div>
+        </div>
+
+
+
+    </body>
+</html>
+

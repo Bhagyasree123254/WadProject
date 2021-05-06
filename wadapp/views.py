@@ -16,6 +16,7 @@ from django.db.models import Q
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib import messages, auth
 from django.http import *
+from .models.review import Review
 
 
 class Home(View):
@@ -81,9 +82,43 @@ def bookpage(request):
         products = Product.get_products_by_name(name)
     else:
         products = Product.get_all_products();
+    flag = False
+    if request.method == 'POST':
+        pd = request.POST
+        emailid = pd.get('emailid')
+        bookname = pd.get('bookname')
+        reviews = pd.get('reviews')
+        rating = pd.get('rating')
+        # valid
+        value = {
+            'emailid': emailid,
+            'bookname': bookname,
+            'reviews': reviews,
+            'rating': rating
+        }
+        error_message = None
+        review = Review(
+            emailid=emailid,
+            bookname=bookname,
+            reviews=reviews,
+            rating=rating
+        )
+        email = request.session.get('email')
+        customer = Customer.get_by_email(email)
+        orders = Order.get_orders_by_customer(str(customer.id))
+        print(orders)
 
-    return render(request, 'bookpage.html', {'products': products})
-
+        for order in orders:
+            if bookname == order.product.name:
+                review.register()
+                flag = True
+    email = request.session.get('email')
+    reviewsn = Review.get_all_reviews()
+    if not flag:
+        error_message = 'You can give review only if you this book'
+        return render(request, 'bookpage.html',
+                      {'products': products, 'reviewsn': reviewsn, 'email': email, 'error': error_message})
+    return render(request, 'bookpage.html', {'products': products, 'reviewsn': reviewsn, 'email': email})
 
 def newbookpage(request):
     name = request.GET.get('name')
@@ -91,8 +126,42 @@ def newbookpage(request):
         products1 = New_releases.get_newreleases_by_name(name)
     else:
         products1 = New_releases.get_all_newreleases()
-
-    return render(request, 'newbookpage.html', {'products1': products1})
+    flag = False
+    if request.method == 'POST':
+        pd = request.POST
+        emailid = pd.get('emailid')
+        bookname = pd.get('bookname')
+        reviews = pd.get('reviews')
+        rating = pd.get('rating')
+        # valid
+        value = {
+            'emailid': emailid,
+            'bookname': bookname,
+            'reviews': reviews,
+            'rating': rating
+        }
+        error_message = None
+        review = Review(
+            emailid=emailid,
+            bookname=bookname,
+            reviews=reviews,
+            rating=rating
+        )
+        email = request.session.get('email')
+        customer = Customer.get_by_email(email)
+        orders = Order.get_orders_by_customer(str(customer.id))
+        print(orders)
+        for order in orders:
+            if bookname == order.newbook.name:
+                review.register()
+                flag = True
+    email = request.session.get('email')
+    reviewsn = Review.get_all_reviews()
+    if not flag:
+        error_message = 'You can review only if you buy this book'
+        return render(request, 'newbookpage.html',
+                      {'products1': products1, 'reviewsn': reviewsn, 'email': email, 'error': error_message})
+    return render(request, 'newbookpage.html', {'products1': products1, 'reviewsn': reviewsn, 'email': email})
 
 
 def downloadbooks(request):
@@ -208,8 +277,14 @@ def search(request):
         srch = request.POST.get('srh')
         if srch:
             match = Product.objects.filter(Q(name__icontains=srch))
-            if match:
+            match1 = New_releases.objects.filter(Q(name__icontains=srch))
+
+            if match and match1:
+                return render(request, 'search.html', {'sr': match, 'sr1': match1})
+            elif match:
                 return render(request, 'search.html', {'sr': match})
+            elif match1:
+                return render(request, 'search.html', {'sr1': match1})
             else:
                 return render(request, 'notfound.html')
 
@@ -300,7 +375,14 @@ class orders(View):
 
 def myaccount(request):
     email = request.session.get('email')
-    return render(request, 'myaccount.html', {'email': email})
+    review_mail = Review.get_review_by_email(email)
+    customer = Customer.get_by_email(email)
+    orders = Order.get_orders_by_customer(str(customer.id))
+    cart = request.session.get('cart')
+    products = Product.get_products_by_id(list(cart.keys()))
+    usedbooks = Usedbook.get_usedbooks_by_id(list(cart.keys()))
+    newbooks = New_releases.get_newreleases_by_id(list(cart.keys()))
+    return render(request, 'myaccount.html', {'email': email,'reviewsn':review_mail,'orders':orders,'products':products,'usedbooks': usedbooks,'newbooks': newbooks})
 
 
 def usedbooks(request):
@@ -309,8 +391,43 @@ def usedbooks(request):
         usedbooks = Usedbook.get_usedbooks_by_name(name)
     else:
         usedbooks = Usedbook.get_all_usedbooks()
+    flag = False
+    if request.method == 'POST':
+        pd = request.POST
+        emailid = pd.get('emailid')
+        bookname = pd.get('bookname')
+        reviews = pd.get('reviews')
+        rating = pd.get('rating')
+        # valid
+        value = {
+            'emailid': emailid,
+            'bookname': bookname,
+            'reviews': reviews,
+            'rating': rating
+        }
+        error_message = None
+        review = Review(
+            emailid=emailid,
+            bookname=bookname,
+            reviews=reviews,
+            rating=rating
+        )
+        email = request.session.get('email')
+        customer = Customer.get_by_email(email)
+        orders = Order.get_orders_by_customer(str(customer.id))
+        print(orders)
+        for order in orders:
+            if bookname == order.newbook.name:
+                review.register()
+                flag = True
+    email = request.session.get('email')
+    reviewsn = Review.get_all_reviews()
+    if not flag:
+        error_message = 'You can give review only if you buy this book'
+        return render(request, 'usedbooks.html',
+                      {'usedbooks': usedbooks, 'reviewsn': reviewsn, 'email': email, 'error': error_message})
+    return render(request, 'usedbook.html', {'usedbooks':usedbooks, 'reviewsn': reviewsn, 'email': email})
 
-    return render(request, 'usedbooks.html', {'usedbooks': usedbooks})
 
 
 def returnbook(request):

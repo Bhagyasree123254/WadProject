@@ -7,6 +7,7 @@ from .models.new_releases import New_releases
 from .models.downloadbooks import DownloadBook
 from .models.orders import Order
 from .models.usedbooks import Usedbook
+from .models.review import Review
 
 class AdminProduct(admin.ModelAdmin):
     list_display = ['name', 'price', 'category']
@@ -41,5 +42,5 @@ admin.site.register(New_releases, AdminNew)
 admin.site.register(DownloadBook, AdminDownloadBooks)
 admin.site.register(Order)
 admin.site.register(Usedbook, AdminUsedBook)
-
+admin.site.register(Review)
 

@@ -429,56 +429,16 @@ def usedbooks(request):
     return render(request, 'usedbook.html', {'usedbooks':usedbooks, 'reviewsn': reviewsn, 'email': email})
 
 
+class returnbook(View):
+    def post(self,request):
+        system = request.POST.get('system')
 
-def returnbook(request):
-    system = request.POST.get('system')
+        return render(request, 'refund.html', {'system': system})
 
-    print(system)
-
-    return render(request, 'refund.html', {'system': system})
-
+    def get(self,request):
+        return render(request,'returnbook.html')
 
 class refund(View):
-    def post(self,request):
-        orderid=request.POST.get('orderid')
-        print(orderid)
-        print(orderid)
-
-        email = request.session.get('email')
-        print(email)
-        customer = Customer.get_by_email(email)
-
-       # print(customer)
-
-        orders = Order.get_orders_by_customer(str(customer.id))
-        for order in orders:
-            if str(order.id)==str(system):
-                name=order.product.name
-                price=order.product.price
-
-        print(name)
-        print(price)
-        to = "samhithareddy905@gmail.com"
-
-        acc_num = request.POST.get('Account Number')
-        acc_numcon = request.POST.get('Confirm')
-        ifsc = request.POST.get('Ifsc Code')
-
-
-        if acc_num == acc_numcon:
-            send_mail(
-                # subject
-                "return request",
-                # message
-                acc_num+":account number  ; "+ifsc+":ifsc code   ;"+name+":name of book",
-                # from email
-                settings.EMAIL_HOST_USER,
-
-                # rec list
-                [to]
-            )
-
-        return render(request, 'displaymsg.html')
 
 
 
@@ -495,19 +455,42 @@ def displaymsg(request):
     print(email)
     customer = Customer.get_by_email(email)
 
-    # print(customer)
-
+    print(customer)
+    orderid = request.POST.get('orderid')
     orders = Order.get_orders_by_customer(str(customer.id))
+
+    to = "samhithareddy905@gmail.com"
+
+    acc_num = request.POST.get('Account Number')
+    acc_numcon = request.POST.get('Confirm')
+    ifsc = request.POST.get('Ifsc Code')
+
+
     for order in orders:
-        if order.status == True and order.return_status == False:
-            name = order.product.name
-            price = order.product.price
+        if str(order.id)==str(orderid):
+            name=order.product.name
+            price=order.product.price
 
     print(name)
     print(price)
 
+    if acc_num == acc_numcon:
+        send_mail(
+            # subject
+            "return request",
+            # message
+            acc_num + ":account number  ; " + ifsc + ":ifsc code   ;" + name + ":name of book" +str(price)+":price",
+            # from email
+            settings.EMAIL_HOST_USER,
 
-    return render(request, 'displaymsg.html',{'name':name,'price':price})
+            # rec list
+            [to]
+        )
+
+
+
+    return render(request, 'displaymsg.html',{'price':price,'name':name})
+
 
 
 def checkout_success(request):

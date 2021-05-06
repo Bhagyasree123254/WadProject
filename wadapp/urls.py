@@ -18,11 +18,12 @@ urlpatterns = [
     path('checkout', checkout.as_view(), name="checkout"),
     path('orders', orders.as_view(), name="orders"),
     path('usedbooks',views.usedbooks,name='usedbooks'),
-    path('returnbook', views.returnbook, name='returnbook'),
+    path('returnbook', returnbook.as_view(), name='returnbook'),
 
-    path('displaymsg', views.displaymsg, name='displaymsg'),
+path('displaymsg', views.displaymsg, name='displaymsg'),
     path('checkout_success', views.checkout_success, name='checkout_success'),
     path('email', views.sendemail, name='email'),
     path('refund', refund.as_view(), name='refund'),
-    path('returnbook/', views.returnbook, name='returnbook'),
+
+    path('displaymsg/', views.displaymsg, name='displaymsg'),
 ]

@@ -148,10 +148,9 @@ a:hover {
 <br>
 <br>
 <a href="{% url 'orders' %}" class="previous">&laquo; Previous</a>
-    <form action="/refund" method="post">
-        {% csrf_token %}
-        <a href="{% url 'refund' %}" class="next"><button name="done" value="{{system}}" type="submit">Next &raquo;</button></a>
-    </form>
+
+        <a href="{% url 'refund' %}" class="next">Next &raquo;</a>
+
 
 </div>
 </div>

@@ -97,8 +97,10 @@ function validateForm() {
 
 
 <div class="container">
-<form name="myForm" action=" " onsubmit="return validateForm()" method="post">
+<form name="myForm" action="/displaymsg/ " onsubmit="return validateForm()" method="post">
     {% csrf_token %}
+    <p>Order id:<input type="text"
+                               name="orderid" value="{{system}}"  /></p>
     <p>Account Number : <input type="text"
                                name="Account Number" /></p>
 

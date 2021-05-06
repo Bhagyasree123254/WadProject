@@ -166,8 +166,12 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
                 </p>
             </div>
             <div role="tabpanel" class="tab-pane" id="usedbooks">
+            {% if product|find_usedbook:usedbooks %}
             <h4>Click the below button to see the image and price of the used book</h4>
             <a href="/usedbooks?name={{product.name}}"><button type="button" class="btn-lg btn-warning">Used Book</button></a>
+            {% else %}
+                <h4>Sorry! The usedbook for the book "{{ product.name }}" is not available.</h4>
+            {% endif %}
 
             </div>
             <div role="tabpanel" class="tab-pane" id="reviews">

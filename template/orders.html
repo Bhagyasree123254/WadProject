@@ -95,8 +95,8 @@
 
             <tr>
                 <td>{{forloop.counter}}</td>
-                <td><img style="height: 100px" class="rounded-circle" src="{{order.product.image.url}}" alt="product"></td>
-                <td>{{order.product.name}}</td>
+                <td><img style="height: 100px" class="rounded-circle" src="{{order|find_by_image}}" alt="product"></td>
+                <td>{{order|find_by_price}}</td>
                 <td>{{order.date}}<td>
                 <td>{{order.price|currency}}</td>
                 <td>{{order.quantity}}</td>
@@ -151,8 +151,8 @@
 </div>
 </div>
 
-<div class="as">
- <a href="{% url 'Home' %}" class="previous">&laquo; Previous</a>
+<div>
+   <a href="{% url 'Home' %}" class="btn btn-warning" style="margin-left:48%; margin-bottom: 2%; font-size:22px"> &laquo; Previous</a>
 </div>
 
 </body>

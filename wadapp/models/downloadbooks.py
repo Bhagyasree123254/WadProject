@@ -14,3 +14,10 @@ class DownloadBook(models.Model):
     @staticmethod
     def get_all_downloadbooks():
         return DownloadBook.objects.all()
+
+    @staticmethod
+    def get_downloadbooks_by_name(name):
+        if name:
+            return DownloadBook.objects.filter(name=name)
+        else:
+            return DownloadBook.get_all_downloadbooks()

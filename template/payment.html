@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Payment Form</title>
+
+<script>
+function validateForm() {
+  var n = document.forms["myForm"]["Card Number"].value;
+  if (n == "") {
+    window.alert("Please enter your Card Number.");
+    return false;
+  }
+
+
+  var n1 = document.forms["myForm"]["Cvv number"].value;
+  if (n1 == "") {
+    window.alert("Please enter the CVV number.");
+    return false;
+  }
+
+}
+</script>
+
+<style>
+
+            input[type=text], select, textarea {
+                width: 50%;
+                padding: 10px;
+                border: 2px solid #ccc;
+                border-radius: 4px;
+                box-sizing: border-box;
+                margin-top: 6px;
+                margin-bottom: 13px;
+
+            }
+
+            input[type=submit] {
+            background-color: #04AA6D;
+            color: white;
+            padding: 10px 12px;
+            border: none;
+            border-radius: 2px;
+            cursor: pointer;
+            }
+
+            input[type=reset] {
+            background-color: rgb(15, 75, 240);
+            color: white;
+            padding: 10px 12px;
+            border: none;
+            border-radius: 2px;
+            cursor: pointer;
+            }
+
+            .container {
+              margin: 0 auto;
+			  width: 700px;
+              border: 5px solid black;
+              background-color: #f2f2f2;
+              padding: 20px;
+            }
+
+			p{
+            padding: 12px 14px;
+            text-decoration: none;
+            font-size: 23px;
+            font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif ;
+			}
+		</style>
+</head>
+
+
+<body>
+<h2 style="text-align: center;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 30px;
+    color: #FF7F50">
+    PAYMENT FORM
+</h2>
+<br>
+{% for dlbook in dwnldbooks %}
+
+<h3 style="text-align: center;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 18px;
+    color: #1E90FF">
+    You have to pay <b>Rs.{{dlbook.dlprice}}</b> to get the book downloaded!
+</h3>
+
+<div class="container">
+
+    <h2 style="font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 20px;
+    color: #9932CC">
+		Pay using Credit or Debit Card.
+	</h2>
+<form name="myForm" action="/download?name={{dlbook.name}}" onsubmit="return validateForm()" method="post">
+    {% csrf_token %}
+    <p>Card Holder name : <input type="text"
+                               name="Name" placeholder="Enter your Name"/></p>
+
+    <p>Card Number : <input type="text"
+                                       name="Card Number" placeholder="###-###-###"/></p>
+
+    <p> Expiry Date : <input type="text"
+                                       name="Date" placeholder="DD-MM-YY"/></p>
+
+	<p> CVV number : <input type="text"
+                                       name="Cvv number" placeholder="xxx"/></p>
+
+
+
+    <center>
+    <input style="font-size:18px" type="submit"
+                    value="Pay now" name="Submit" />
+    <input style="font-size:18px" type="reset"
+					value="Cancel" name="Clear" />
+    </center>
+
+</form>
+</div>
+{% endfor %}
+</body>
+</html>

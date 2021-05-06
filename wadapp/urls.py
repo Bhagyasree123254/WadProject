@@ -10,6 +10,8 @@ urlpatterns = [
     path('bookpage', views.bookpage, name='bookpage'),
     path('newbookpage', views.newbookpage, name='newbookpage'),
     path('downloadbooks', views.downloadbooks, name='downloadbooks'),
+    path('payment', views.payment, name='payment'),
+    path('download', views.download, name='download'),
     path('new_releases', views.new_releases, name='new_releases'),
     path('logout', logout, name='logout'),
     path('cart', Cart.as_view(), name="cart"),
@@ -20,7 +22,7 @@ urlpatterns = [
     path('usedbooks',views.usedbooks,name='usedbooks'),
     path('returnbook', returnbook.as_view(), name='returnbook'),
 
-path('displaymsg', views.displaymsg, name='displaymsg'),
+    path('displaymsg', views.displaymsg, name='displaymsg'),
     path('checkout_success', views.checkout_success, name='checkout_success'),
     path('email', views.sendemail, name='email'),
     path('refund', refund.as_view(), name='refund'),

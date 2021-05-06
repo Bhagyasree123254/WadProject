@@ -77,11 +77,18 @@ def category(request):
 
 
 def bookpage(request):
-    name = request.GET.get('name')
-    if name:
-        products = Product.get_products_by_name(name)
+    name1 = request.GET.get('name')
+    if name1:
+        products = Product.get_products_by_name(name1)
     else:
-        products = Product.get_all_products();
+        products = Product.get_all_products()
+
+    name2 = request.GET.get('name')
+    if name2:
+        usedbooks = Usedbook.get_usedbooks_by_name(name2)
+    else:
+        usedbooks = Usedbook.get_all_usedbooks()
+
     flag = False
     if request.method == 'POST':
         pd = request.POST
@@ -117,8 +124,8 @@ def bookpage(request):
     if not flag:
         error_message = 'You can give review only if you this book'
         return render(request, 'bookpage.html',
-                      {'products': products, 'reviewsn': reviewsn, 'email': email, 'error': error_message})
-    return render(request, 'bookpage.html', {'products': products, 'reviewsn': reviewsn, 'email': email})
+                      {'products': products, 'usedbooks': usedbooks, 'reviewsn': reviewsn, 'email': email, 'error': error_message})
+    return render(request, 'bookpage.html', {'products': products, 'usedbooks': usedbooks, 'reviewsn': reviewsn, 'email': email})
 
 def newbookpage(request):
     name = request.GET.get('name')
@@ -167,6 +174,24 @@ def newbookpage(request):
 def downloadbooks(request):
     dlbooks = DownloadBook.get_all_downloadbooks()
     return render(request, 'downloadbooks.html', {'dlbooks': dlbooks})
+
+def payment(request):
+    name = request.GET.get('name')
+    if name:
+        dwnldbooks =DownloadBook.get_downloadbooks_by_name(name)
+    else:
+        dwnldbooks = DownloadBook.get_all_downloadbooks()
+
+    return render(request, 'payment.html', {'dwnldbooks': dwnldbooks})
+
+def download(request):
+    name = request.GET.get('name')
+    if name:
+        dwnldbooks =DownloadBook.get_downloadbooks_by_name(name)
+    else:
+        dwnldbooks = DownloadBook.get_all_downloadbooks()
+
+    return render(request, 'download.html', {'dwnldbooks': dwnldbooks})
 
 
 def new_releases(request):

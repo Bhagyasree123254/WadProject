@@ -73,3 +73,11 @@ def find_by_image(order):
     else:
         image = order.newbook.image
     return image.url
+
+@register.filter(name='find_usedbook')
+def find_usedbook(product,usedbooks):
+    for usedbook in usedbooks:
+        if usedbook.name == product.name:
+            return True
+        else:
+            return False

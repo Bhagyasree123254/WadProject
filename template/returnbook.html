@@ -119,9 +119,13 @@ a:hover {
 
 <body>
 
+
+
+
+
 <div class="bg">
 <div class="main">
-<h2 style="font-size: 32px;color:#C71585">Why do you want to return the book?</h2>
+<h2 style="font-size: 32px;color:#C71585">Why do you want to return the book</h2>
 <label class="container">Some pages are missing
   <input type="radio" checked="checked" name="radio">
   <span class="checkmark"></span>
@@ -144,7 +148,10 @@ a:hover {
 <br>
 <br>
 <a href="{% url 'orders' %}" class="previous">&laquo; Previous</a>
-<a href="{% url 'refund' %}" class="next">Next &raquo;</a>
+    <form action="/refund" method="post">
+        {% csrf_token %}
+        <a href="{% url 'refund' %}" class="next"><button name="done" value="{{system}}" type="submit">Next &raquo;</button></a>
+    </form>
 
 </div>
 </div>

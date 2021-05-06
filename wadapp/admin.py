@@ -41,3 +41,5 @@ admin.site.register(New_releases, AdminNew)
 admin.site.register(DownloadBook, AdminDownloadBooks)
 admin.site.register(Order)
 admin.site.register(Usedbook, AdminUsedBook)
+
+

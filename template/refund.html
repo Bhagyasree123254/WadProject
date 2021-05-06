@@ -76,6 +76,12 @@ function validateForm() {
             font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif ;
 			}
 		</style>
+
+
+
+
+
+
 </head>
 
 
@@ -89,8 +95,9 @@ function validateForm() {
 <br>
 <br>
 
+
 <div class="container">
-<form name="myForm" action="/displaymsg" onsubmit="return validateForm()" method="post">
+<form name="myForm" action=" " onsubmit="return validateForm()" method="post">
     {% csrf_token %}
     <p>Account Number : <input type="text"
                                name="Account Number" /></p>
@@ -107,7 +114,7 @@ function validateForm() {
 							name="Comment"> </textarea></p>
 
     <center>
-    <input style="font-size:18px" type="submit"
+       <input style="font-size:18px" type="submit"
                     value="Submit" name="Submit" />
     <input style="font-size:18px" type="reset"
 					value="Clear" name="Clear" />

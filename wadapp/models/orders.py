@@ -28,3 +28,7 @@ class Order(models.Model):
             .objects \
             .filter(customer=customer_id) \
             .order_by('-date')
+
+    @staticmethod
+    def get_orders_by_id(ids):
+        return Order.objects.filter(id__in=ids)

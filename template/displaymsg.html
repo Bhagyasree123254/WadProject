@@ -70,7 +70,7 @@
 <br>
 <br>
 <div class="as1">
-    <h3>Money will be refunded to your account.</h3>
+    <h3>amount {{price}} will be refunded to your account.</h3>
     <h3>We promise that this mistake due to which you are returning the book will never happen again.</h3>
 </div>
 <br>
@@ -81,7 +81,15 @@
     <center><h2>THANK YOU!!</h2></center>
 </div>
 <br>
-    <h4 style="font-size:18px;padding-left:17%;">Click <a href="{% url 'Home' %}">Here</a> to go back to Home. </h4>
+    <a href="{% url 'Home' %}"><button style="border: none;
+    float:center;
+    outline: none;
+    padding: 15px 17px;
+    background-color: rgb(1, 150, 150);
+    color: #f1f1f1;
+    cursor: pointer;
+    font-size: 20px;
+    font-family:Arial, Helvetica, sans-serif;">continue shopping</button></a>
 </div>
 </body>
 </html>

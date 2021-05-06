@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
 
 # Create your views here.
-
+from django.core.mail import send_mail
+from django.conf import settings
 from .models.product import Product
 from .models.category import Category
 from .models.main_books import Main_book
@@ -265,13 +266,19 @@ class checkout(View):
             order.save()
 
         request.session['cart'] = {}
-        return redirect('cart')
+        return redirect('checkout_success')
 
     def get(self, request):
         return render(request, 'checkout.html')
 
 
 class orders(View):
+
+
+
+
+
+
 
     def get(self, request):
         email = request.session.get('email')
@@ -287,7 +294,8 @@ class orders(View):
         usedbooks = Usedbook.get_usedbooks_by_id(list(cart.keys()))
         newbooks = New_releases.get_newreleases_by_id(list(cart.keys()))
 
-        return render(request, 'orders.html', {'orders': orders,'products':products,'usedbooks': usedbooks,'newbooks': newbooks})
+        return render(request, 'orders.html',
+                      {'orders': orders, 'products': products, 'usedbooks': usedbooks, 'newbooks': newbooks})
 
 
 def myaccount(request):
@@ -306,12 +314,107 @@ def usedbooks(request):
 
 
 def returnbook(request):
-    return render(request, 'returnbook.html')
+    system = request.POST.get('system')
+
+    print(system)
+
+    return render(request, 'refund.html', {'system': system})
 
 
-def refund(request):
-    return render(request, 'refund.html')
+class refund(View):
+    def post(self,request):
+        orderid=request.POST.get('orderid')
+        print(orderid)
+        print(orderid)
+
+        email = request.session.get('email')
+        print(email)
+        customer = Customer.get_by_email(email)
+
+       # print(customer)
+
+        orders = Order.get_orders_by_customer(str(customer.id))
+        for order in orders:
+            if str(order.id)==str(system):
+                name=order.product.name
+                price=order.product.price
+
+        print(name)
+        print(price)
+        to = "samhithareddy905@gmail.com"
+
+        acc_num = request.POST.get('Account Number')
+        acc_numcon = request.POST.get('Confirm')
+        ifsc = request.POST.get('Ifsc Code')
+
+
+        if acc_num == acc_numcon:
+            send_mail(
+                # subject
+                "return request",
+                # message
+                acc_num+":account number  ; "+ifsc+":ifsc code   ;"+name+":name of book",
+                # from email
+                settings.EMAIL_HOST_USER,
+
+                # rec list
+                [to]
+            )
+
+        return render(request, 'displaymsg.html')
+
+
+
+    def get(self,request):
+
+
+        return render(request, 'refund.html')
+
+
 
 
 def displaymsg(request):
-    return render(request, 'displaymsg.html')
+    email = request.session.get('email')
+    print(email)
+    customer = Customer.get_by_email(email)
+
+    # print(customer)
+
+    orders = Order.get_orders_by_customer(str(customer.id))
+    for order in orders:
+        if order.status == True and order.return_status == False:
+            name = order.product.name
+            price = order.product.price
+
+    print(name)
+    print(price)
+
+
+    return render(request, 'displaymsg.html',{'name':name,'price':price})
+
+
+def checkout_success(request):
+    return render(request, 'checkout_success.html')
+
+
+def sendemail(request):
+    if request.method == "POST":
+        to = "samhithareddy905@gmail.com"
+        bookname = request.POST.get('lastname')
+        print(to, bookname)
+        send_mail(
+            # subject
+            "request for unavailable book",
+            # message
+            bookname,
+            # from email
+            settings.EMAIL_HOST_USER,
+            # rec list
+            [to]
+        )
+        return render(request, 'email.html')
+    else:
+        return render(request, 'email.html')
+
+
+

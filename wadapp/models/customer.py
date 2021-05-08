@@ -19,8 +19,5 @@ class Customer(models.Model):
             return False
     @staticmethod
     def get_by_password(pswd1):
-        try:
-            return Customer.objects.get(pswd1=pswd1)
-        except:
-            return False
+        return Customer.objects.filter(pswd1=pswd1)
 

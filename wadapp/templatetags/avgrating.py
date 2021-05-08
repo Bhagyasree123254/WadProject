@@ -27,3 +27,14 @@ def count(reviewsn,bookname):
     else:
         a='No reviews till now'
         return a
+@register.filter(name='check')
+def check(orders,bookname):
+    flag=True
+    for order in orders:
+        if order.product.name == bookname:
+            flag = False
+        elif order.newbook.name == bookname:
+            flag = False
+        elif order.usedbook.name == bookname:
+            flag = False
+    return flag

@@ -188,13 +188,16 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
   background-color:#f2f2f2;
   padding: 50px;    ">
                     <br>
-                    <input type="submit">
-                    {% if error %}
-						<div class="alert alert-info" role="alert">
-							{{error}}
-						</div>
-						{% endif %}
+                    <button onclick="myfun()">Submit</button>
                 </form>
+                {{% if orders|check:product.name %}
+                        <h1>{{flag}}</h1>
+                        <script>
+                         function myfun(){
+                          alert("Buy this book to give review")}
+                        </script>
+
+                {% endif %}
             </div>
         </div>
 

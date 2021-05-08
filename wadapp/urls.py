@@ -21,7 +21,6 @@ urlpatterns = [
     path('orders', orders.as_view(), name="orders"),
     path('usedbooks',views.usedbooks,name='usedbooks'),
     path('returnbook', returnbook.as_view(), name='returnbook'),
-
     path('displaymsg', views.displaymsg, name='displaymsg'),
     path('checkout_success', views.checkout_success, name='checkout_success'),
     path('email', views.sendemail, name='email'),

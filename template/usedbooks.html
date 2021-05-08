@@ -169,31 +169,7 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
                 {% else %}
                     <h3>No reviews yet..</h3>
                 {% endif %}
-                <form method="post">
-                    {% csrf_token %}
-                    <input type="hidden" name="emailid" value="{{email}}">
-                    <input type="hidden" name="bookname" value="{{usedbook.name}}">
-                     <label>Choose a rating:</label>
-                    <select name="rating">
-                        <option type="number" value=5>5</option>
-                        <option type="number" value=4>4</option>
-                        <option type="number" value=3>3</option>
-                        <option type="number" value=2>2</option>
-                        <option type="number" value=1>1</option>
-                    </select>
-                    <br>
-                    <input type="text" name="reviews" placeholder="Write your review here...." style="height:200px;width:500px;
-                    border-radius: 15px;
-  background-color:#f2f2f2;
-  padding: 50px;    ">
-                    <br>
-                    <input type="submit">
-                    {% if error %}
-						<div class="alert alert-info" role="alert">
-							{{error}}
-						</div>
-						{% endif %}
-                </form>
+
             </div>
         </div>
 

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Refund</title>
+    <title>Refund Request</title>
 
 <script>
 function validateForm() {
@@ -27,6 +27,13 @@ function validateForm() {
     window.alert("Please enter IFSC code.");
     return false;
   }
+
+  var rsn = document.forms["myForm"]["Reason"];
+  if (rsn.selectedIndex < 1) {
+		alert("Please select the reason for returning book.");
+		rsn.focus();
+		return false;
+   }
 }
 </script>
 
@@ -65,12 +72,15 @@ function validateForm() {
               margin: 0 auto;
 			  width: 700px;
               border: 5px solid black;
-              background-color: #f2f2f2;
               padding: 20px;
+              background-color: #f2f2f2;
+              background-image: url("https://images.unsplash.com/photo-1563291074-2bf8677ac0e5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8MXw0MjUyODg5MXx8ZW58MHx8fHw%3D&w=1000&q=80");
+              background-repeat: no-repeat;
+              background-size: cover;
             }
 
 			p{
-            padding: 12px 14px;
+            padding: 5px;
             text-decoration: none;
             font-size: 23px;
             font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif ;
@@ -93,14 +103,13 @@ function validateForm() {
     REFUND REQUEST FORM
 </h2>
 <br>
-<br>
-
 
 <div class="container">
 <form name="myForm" action="/displaymsg/ " onsubmit="return validateForm()" method="post">
     {% csrf_token %}
-    <p>Order id:<input type="text"
-                               name="orderid" value="{{system}}"  /></p>
+    <p>Order id : <input type="text"
+                               name="orderid" value="{{system}}" /></p>
+
     <p>Account Number : <input type="text"
                                name="Account Number" /></p>
 
@@ -110,8 +119,19 @@ function validateForm() {
     <p> IFSC Code : <input type="text"
                                        name="Ifsc Code" /></p>
 
+    <p>Select the reason why do you want to return the book :</p>
+	<p>
+        <select type="text" value="" name="Reason">
+            <option style="font-size:15px;">---Select---</option>
+            <option style="font-size:15px;">Some pages are missing</option>
+            <option style="font-size:15px;">Text is not clear and unable to read</option>
+            <option style="font-size:15px;">Not found the book interesting</option>
+            <option style="font-size:15px;">This is not the book I ordered</option>
+            <option style="font-size:15px;">None of the above mentioned!</option>
+        </select>
+    </p>
 
-    <p>Drop your Comments below(if any) :</p>
+    <p>Drop your Comments below (if any) :</p>
     <p><textarea cols="55"
 							name="Comment"> </textarea></p>
 
@@ -119,7 +139,7 @@ function validateForm() {
        <input style="font-size:18px" type="submit"
                     value="Submit" name="Submit" />
     <input style="font-size:18px" type="reset"
-					value="Clear" name="Clear" />
+					value="Cancel" name="Clear" />
     </center>
 
 </form>

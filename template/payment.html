@@ -27,7 +27,7 @@ function validateForm() {
 <style>
 
             input[type=text], select, textarea {
-                width: 50%;
+                width: 55%;
                 padding: 10px;
                 border: 2px solid #ccc;
                 border-radius: 4px;
@@ -38,7 +38,7 @@ function validateForm() {
             }
 
             input[type=submit] {
-            background-color: #04AA6D;
+            background-color: #3CB371;
             color: white;
             padding: 10px 12px;
             border: none;
@@ -59,16 +59,20 @@ function validateForm() {
               margin: 0 auto;
 			  width: 700px;
               border: 5px solid black;
-              background-color: #f2f2f2;
               padding: 20px;
+              background-color: #f2f2f2;
+              background-image: url("https://www.adamgault.co.uk/wp-content/uploads/2015/11/StillLife026.jpg");
+              background-repeat: no-repeat;
+              background-size: cover;
             }
 
 			p{
-            padding: 12px 14px;
+            padding: 12px;
             text-decoration: none;
-            font-size: 23px;
+            font-size: 25px;
             font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif ;
 			}
+
 		</style>
 </head>
 
@@ -77,24 +81,23 @@ function validateForm() {
 <h2 style="text-align: center;
     font-family: Georgia, 'Times New Roman', Times, serif;
     font-size: 30px;
-    color: #FF7F50">
+    color: #FF69B4">
     PAYMENT FORM
 </h2>
 <br>
 {% for dlbook in dwnldbooks %}
 
 <h3 style="text-align: center;
-    font-family: Georgia, 'Times New Roman', Times, serif;
-    font-size: 18px;
+    font-size: 23px;
     color: #1E90FF">
-    You have to pay <b>Rs.{{dlbook.dlprice}}</b> to get the book downloaded!
+    You have to pay Rs.{{dlbook.dlprice}} to get the book downloaded!
 </h3>
 
 <div class="container">
 
     <h2 style="font-family: Georgia, 'Times New Roman', Times, serif;
     font-size: 20px;
-    color: #9932CC">
+    color: #FF4500">
 		Pay using Credit or Debit Card.
 	</h2>
 <form name="myForm" action="/download?name={{dlbook.name}}" onsubmit="return validateForm()" method="post">

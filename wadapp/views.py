@@ -444,22 +444,20 @@ def displaymsg(request):
     acc_num = request.POST.get('Account Number')
     acc_numcon = request.POST.get('Confirm')
     ifsc = request.POST.get('Ifsc Code')
-
+    rsn = request.POST.get('Reason')
 
     for order in orders:
-        if str(order.id)==str(orderid):
-            name=order.product.name
-            price=order.product.price
+        if str(order.id) == str(orderid):
+            price = order.price
 
-    print(name)
     print(price)
 
     if acc_num == acc_numcon:
         send_mail(
             # subject
-            "return request",
+            "Return and Refund request",
             # message
-            acc_num + ":account number  ; " + ifsc + ":ifsc code   ;" + name + ":name of book" +str(price)+":price",
+            acc_num + " :Account number ; " + ifsc + " :Ifsc Code ;" + str(orderid) + " : Order Id  ;" + str(price) + " :Price of the book ;" + rsn + " :Reason for returning the book.",
             # from email
             settings.EMAIL_HOST_USER,
 
@@ -469,7 +467,7 @@ def displaymsg(request):
 
 
 
-    return render(request, 'displaymsg.html',{'price':price,'name':name})
+    return render(request, 'displaymsg.html',{'price':price})
 
 
 

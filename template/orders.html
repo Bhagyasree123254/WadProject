@@ -43,6 +43,7 @@
     .round {
         border-radius: 50%;
     }
+
     </style>
 
 
@@ -55,14 +56,9 @@
              alert ("This book has already been returned!");
         }
 
-
-
-
-
-
-
-
      </script>
+
+
 </head>
 
 
@@ -120,22 +116,19 @@
 
                 {%if order.status %}
                 <form action="/returnbook" method="post" id="systemform">
-                          {% csrf_token %}
+                    {% csrf_token %}
+
                     {%if order.return_status %}
-                        <td><button type="button" name="system" value="{{order.date}}" class="btn btn-info" style="float:left;font-size: 20px;" onclick="AlertMsg()">return</button></td>
+                        <td><button type="button" class="btn btn-info" style="float:left;font-size: 20px;" onclick="AlertMsg()">return</button></td>
                     {%else%}
-
                         <td><a href="{% url 'returnbook' %}"><button name="system" value="{{order.id}}" form="systemform" type="submit" class="btn btn-info" style="float:left;font-size: 20px;">return</button></a></td>
-
                     {% endif %}
 
                 {%else%}
+                    <td><button type="button" class="btn btn-info" style="float:left;font-size: 20px;" onclick="showAlert()">return</button></td>
 
-
-
-                    <td><button name="system" value="{{order.date}}" type="button" class="btn btn-info" style="float:left;font-size: 20px;" onclick="showAlert()">return</button></td>
                  </form>
-                    {% endif %}
+                {% endif %}
 
             </tr>
             {% endfor %}

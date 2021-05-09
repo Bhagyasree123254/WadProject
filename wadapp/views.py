@@ -359,7 +359,8 @@ class checkout(View):
         return redirect('checkout_success')
 
     def get(self, request):
-        return render(request, 'checkout.html')
+        email = request.session.get('email')
+        return render(request, 'checkout.html',{'email': email})
 
 
 class orders(View):
@@ -439,7 +440,6 @@ def displaymsg(request):
     orderid = request.POST.get('orderid')
     orders = Order.get_orders_by_customer(str(customer.id))
 
-    to = "samhithareddy905@gmail.com"
 
     acc_num = request.POST.get('Account Number')
     acc_numcon = request.POST.get('Confirm')
@@ -462,7 +462,7 @@ def displaymsg(request):
             settings.EMAIL_HOST_USER,
 
             # rec list
-            [to]
+            ["gangajayasamhitha.b19@iiits.in","bhagyasree.r19@iiits.in","bhanuaswitha.i19@iiits.in","venkatanandhini.p19@iiits.in"]
         )
 
 
@@ -477,7 +477,6 @@ def checkout_success(request):
 
 def sendemail(request):
     if request.method == "POST":
-        to = "samhithareddy905@gmail.com"
         bookname = request.POST.get('nameofbook')
         version = request.POST.get('version')
         condition = request.POST.get('condition')
@@ -493,9 +492,9 @@ def sendemail(request):
             # from email
             settings.EMAIL_HOST_USER,
             # rec list
-            [to]
+            ["gangajayasamhitha.b19@iiits.in","bhagyasree.r19@iiits.in","bhanuaswitha.i19@iiits.in","venkatanandhini.p19@iiits.in"]
         )
-        return render(request, 'email.html')
+        return render(request, 'request.html')
     else:
         return render(request, 'email.html')
 

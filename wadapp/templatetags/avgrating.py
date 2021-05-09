@@ -35,6 +35,5 @@ def check(orders,bookname):
             flag = False
         elif order.newbook.name == bookname:
             flag = False
-        elif order.usedbook.name == bookname:
-            flag = False
+
     return flag

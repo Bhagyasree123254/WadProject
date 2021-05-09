@@ -79,8 +79,8 @@
                 <th>Price</th>
                 <th>Quantity</th>
                 <th>Total</th>
-                <th>status</th>
-                <th>return_status</th>
+                <th>Status</th>
+                <th>Return_status</th>
                 <th>Return</th>
 
             </tr>
@@ -99,16 +99,16 @@
                 <td>{{order.quantity|multiply:order.price|currency}}</td>
 
                 {%if order.status %}
-                <td><small style="color:green">successful</small></td>
+                <td><small style="color:green">Successful</small></td>
                 {%else%}
-                <td><small style="color:red">pending</small></td>
+                <td><small style="color:red">Pending</small></td>
                  {%endif%}
 
                 {%if order.status %}
                      {%if order.return_status %}
-                        <td><small style="color:green">returned</small></td>
+                        <td><small style="color:green">Returned</small></td>
                      {%else%}
-                        <td><small style="color:red">kept</small></td>
+                        <td><small style="color:red">Kept</small></td>
                     {%endif%}
                 {%else%}
                     <td></td>
@@ -119,13 +119,13 @@
                     {% csrf_token %}
 
                     {%if order.return_status %}
-                        <td><button type="button" class="btn btn-info" style="float:left;font-size: 20px;" onclick="AlertMsg()">return</button></td>
+                        <td><button type="button" class="btn btn-info" style="float:left;font-size: 20px;" onclick="AlertMsg()">Return</button></td>
                     {%else%}
-                        <td><a href="{% url 'returnbook' %}"><button name="system" value="{{order.id}}" form="systemform" type="submit" class="btn btn-info" style="float:left;font-size: 20px;">return</button></a></td>
+                        <td><a href="{% url 'returnbook' %}"><button name="system" value="{{order.id}}" form="systemform" type="submit" class="btn btn-info" style="float:left;font-size: 20px;">Return</button></a></td>
                     {% endif %}
 
                 {%else%}
-                    <td><button type="button" class="btn btn-info" style="float:left;font-size: 20px;" onclick="showAlert()">return</button></td>
+                    <td><button type="button" class="btn btn-info" style="float:left;font-size: 20px;" onclick="showAlert()">Return</button></td>
 
                  </form>
                 {% endif %}

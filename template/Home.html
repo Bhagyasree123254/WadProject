@@ -49,7 +49,7 @@
 
 
 
-                My Cart <span style="color:cyan">({{request.session.cart.keys|length}})</span></button2></a>
+                My Cart <span style="color:rgb(252, 250, 250)">({{request.session.cart.keys|length}})</span></button2></a>
 
         </form>
         </div>
@@ -78,11 +78,10 @@
             </div>
 
             <a href="{% url 'downloadbooks' %}" ><i class="fa fa-download"></i> Books for Download</a>
-            <a href="{% url 'checkout' %}"><i class="fa fa-fw fa-truck"></i>Place order</a>
             <a href="{% url 'myaccount' %}" target="_blank"><i class="fa fa-user"></i> My account</a>
             <a href="{% url 'orders' %}" ><i class="fa fa-shopping-bag"></i> My Orders</a>
             <a href="{% url 'new_releases' %}" ><i class="fa fa-book"></i> New Releases</a>
-            <a href="{% url 'email' %}"><i class="fa fa-envelope"></i> Place request</a>
+            <a href="{% url 'email' %}" target="_blank"><i class="fa fa-envelope"></i> Place request</a>
 
         </div>
 
@@ -125,7 +124,7 @@
                 {% for newproduct in newproducts %}
 
                    <div class="mySlides fade" style="text-align:center">
-                       <div class="numbertext"> {{newproduct.id_number}} / 3</div>
+                       <div class="numbertext" style="color:black"><b> {{newproduct.id_number}} / 3</b></div>
                        <a href="/newbookpage?name={{newproduct.name}}" target="_blank"><img src="{{newproduct.image.url}}" style="width:47%" width="400px" height="550px" ></a>
                        <br>
                        <br>

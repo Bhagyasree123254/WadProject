@@ -480,13 +480,18 @@ def checkout_success(request):
 def sendemail(request):
     if request.method == "POST":
         to = "samhithareddy905@gmail.com"
-        bookname = request.POST.get('lastname')
-        print(to, bookname)
+        bookname = request.POST.get('nameofbook')
+        version = request.POST.get('version')
+        condition = request.POST.get('condition')
+
+
+
         send_mail(
             # subject
             "request for unavailable book",
             # message
-            bookname,
+            bookname + "   :   name of book  ;   " + str(version) + "   :   version    ;  " + str(condition) + "  :condition",
+
             # from email
             settings.EMAIL_HOST_USER,
             # rec list

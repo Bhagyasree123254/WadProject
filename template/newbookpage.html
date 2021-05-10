@@ -190,7 +190,7 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
                     <br>
                     <button onclick="myfun()">Submit</button>
                 </form>
-                {{% if orders|check:product.name %}
+                {% if orders|check:product.name %}
                         <h1>{{flag}}</h1>
                         <script>
                          function myfun(){
